@@ -1,0 +1,82 @@
+'use strict';
+const Userstorage = require('./UserStorage');
+
+class user {
+  constructor(body, session) {
+    this.body = body;
+    this.session = session;
+  }
+
+  async login() {
+    const body = this.body;
+    const session = this.session;
+    const response = {};
+
+    const user = await Userstorage.GetUserInfo(body.id);
+    if (user) {
+      if (user.id) {
+        if (user.id === body.id) {
+          if (user.psword === body.psword) {
+            session.userName = user.username;
+            session.is_logined = true;
+            // session.save();
+            response.success = true;
+            return response;
+          }
+          response.success = false;
+          response.msg = '비밀번호가 틀립니다.';
+          return response;
+        }
+      }
+    }
+    response.success = false;
+    response.msg = '아이디를 확인해주세요.';
+    return response;
+  }
+
+  async register() {
+    const body = this.body;
+    const response = {};
+    if (body.psword === body.confirmPsword) {
+      try {
+        await Userstorage.SaveUserInfo(body);
+        response.success = true;
+        response.msg = '회원가입 성공';
+        return response;
+      } catch (err) {
+        console.log(err);
+        if (err === 1062) {
+          response.success = false;
+          response.msg = '아이디가 이미 존재합니다.';
+        }
+        return response;
+      }
+    }
+    response.success = false;
+    response.msg = '2차 비밀번호를 확인하십시오.';
+    return response;
+  }
+
+  async finder() {
+    const body = this.body;
+    const response = {};
+    const { id, psword, email } = await Userstorage.GetUserInfo(body.id);
+    // console.log('test  ' + body.emailAdress);
+    // console.log('test2  ' + JSON.stringify(email));
+    if (id) {
+      if (id === body.id && email === body.emailAdress) {
+        response.success = true;
+        response.msg = `비밀번호는 ${psword}입니다.`;
+        return response;
+      }
+      response.success = false;
+      response.msg = '이메일을 확인해 주세요.';
+      return response;
+    }
+    response.success = false;
+    response.msg = '아이디를 확인해 주세요.';
+    return response;
+  }
+}
+
+module.exports = user;
