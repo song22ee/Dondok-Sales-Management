@@ -26,8 +26,7 @@ class UserStorage {
       con.query(sql, (err, rows) => {
         if (err) {
           reject(err);
-        }
-        resolve(rows);
+        } else resolve(rows);
       });
     });
   }
@@ -38,8 +37,7 @@ class UserStorage {
       con.query(sql, [id], (err, rows) => {
         if (err) {
           reject(`${err}`);
-        }
-        resolve(rows[0]);
+        } else resolve(rows[0]);
       });
     });
   }
@@ -51,8 +49,7 @@ class UserStorage {
       con.query(sql, userinfo, (err, rows) => {
         if (err) {
           reject(err.errno);
-        }
-        resolve({ success: true });
+        } else resolve({ success: true });
       });
     });
   }

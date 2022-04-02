@@ -1,22 +1,27 @@
 'use strict';
+//Logger
+const logger = require('../../config/logger');
 
 const User = require('../../models/user');
 
 const output = {
   home: (req, res) => {
+    logger.info(`GET / 200 "home"`);
     res.render('home/index');
   },
 
   login: (req, res) => {
+    logger.info(`GET / 200 "login"`);
     res.render('home/login');
   },
 
   finder: (req, res) => {
+    logger.info(`GET / 200 "finder"`);
     res.render('home/finder');
   },
 };
 
-const proccess = {
+const process = {
   login: async (req, res) => {
     const user = new User(req.body, req.session); //constructer(body)로 전달
     const response = await user.login(); //함수 실행
@@ -41,5 +46,5 @@ const proccess = {
 
 module.exports = {
   output,
-  proccess,
+  process,
 };

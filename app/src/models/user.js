@@ -19,7 +19,6 @@ class user {
           if (user.psword === body.psword) {
             session.userName = user.username;
             session.is_logined = true;
-            // session.save();
             response.success = true;
             return response;
           }

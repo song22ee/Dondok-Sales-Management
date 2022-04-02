@@ -1,9 +1,10 @@
 'use strict';
 
 const app = require('../app.js');
+const logger = require('../src/config/logger');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log('서버 가동중 ...');
+  logger.info(`Port : ${PORT} 서버 가동중 ...`);
 });
