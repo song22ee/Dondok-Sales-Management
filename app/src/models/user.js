@@ -11,26 +11,32 @@ class user {
     const body = this.body;
     const session = this.session;
     const response = {};
-
-    const user = await Userstorage.GetUserInfo(body.id);
-    if (user) {
-      if (user.id) {
-        if (user.id === body.id) {
-          if (user.psword === body.psword) {
-            session.userName = user.username;
-            session.is_logined = true;
-            response.success = true;
+    try {
+      const user = await Userstorage.GetUserInfo(body.id);
+      if (user) {
+        if (user.id) {
+          if (user.id === body.id) {
+            if (user.psword === body.psword) {
+              session.userName = user.username;
+              session.is_logined = true;
+              response.success = true;
+              return response;
+            }
+            response.success = false;
+            response.msg = '비밀번호가 틀립니다.';
             return response;
           }
-          response.success = false;
-          response.msg = '비밀번호가 틀립니다.';
-          return response;
         }
       }
+      response.success = false;
+      response.msg = '아이디를 확인해주세요.';
+      return response;
+    } catch (err) {
+      response.success = false;
+      response.msg = '로그인 오류';
+      response.err = err;
+      return response;
     }
-    response.success = false;
-    response.msg = '아이디를 확인해주세요.';
-    return response;
   }
 
   async register() {
@@ -43,10 +49,10 @@ class user {
         response.msg = '회원가입 성공';
         return response;
       } catch (err) {
-        console.log(err);
-        if (err === 1062) {
+        if (err.errno === 1062) {
           response.success = false;
           response.msg = '아이디가 이미 존재합니다.';
+          response.err = err;
         }
         return response;
       }
@@ -60,8 +66,6 @@ class user {
     const body = this.body;
     const response = {};
     const { id, psword, email } = await Userstorage.GetUserInfo(body.id);
-    // console.log('test  ' + body.emailAdress);
-    // console.log('test2  ' + JSON.stringify(email));
     if (id) {
       if (id === body.id && email === body.emailAdress) {
         response.success = true;

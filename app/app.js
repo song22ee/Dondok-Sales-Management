@@ -9,10 +9,8 @@ const app = express();
 //라우팅
 const home = require('./src/routes/home');
 
+//config
 const sessionConfig = require('./src/config/session');
-const logger = require('./src/config/logger');
-
-logger.error('Log Test ...');
 
 //앱 세팅
 app.set('views', './src/views');

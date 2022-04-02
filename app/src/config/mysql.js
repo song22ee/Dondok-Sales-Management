@@ -1,4 +1,7 @@
+'use strict';
+
 const mysql = require('mysql');
+const logger = require('./logger');
 
 const mysqlConnection = {
   config: function () {
@@ -15,18 +18,18 @@ const mysqlConnection = {
   open: function (con) {
     con.connect((err) => {
       if (err) {
-        console.log('MySQL 연결 실패 : ', err);
+        logger.error('MySQL 연결 실패 : ', err);
       } else {
-        console.log('MySQL Connected ...');
+        logger.info('MySQL Connected ...');
       }
     });
   },
   close: function (con) {
     con.end((err) => {
       if (err) {
-        console.log('MySQL 종료 실패 : ', err);
+        logger.error('MySQL 종료 실패 : ', err);
       } else {
-        console.log('MySQL Terminated ...');
+        logger.info('MySQL Terminated ...');
       }
     });
   },

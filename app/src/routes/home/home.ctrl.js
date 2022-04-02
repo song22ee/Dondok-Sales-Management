@@ -25,6 +25,7 @@ const process = {
   login: async (req, res) => {
     const user = new User(req.body, req.session); //constructer(body)로 전달
     const response = await user.login(); //함수 실행
+    if (response.err) logger.error(`${response.err}`);
     req.session.save(() => {
       // return res.redirect('/');
       return res.json(response);
@@ -34,6 +35,7 @@ const process = {
   register: async (req, res) => {
     const user = new User(req.body); //constructer(body)로 전달
     const response = await user.register(); //함수 실행
+    if (response.err) logger.error(`${response.err}`);
     return res.json(response);
   },
 

@@ -44,11 +44,16 @@ class UserStorage {
 
   static SaveUserInfo(userInfo) {
     return new Promise((resolve, reject) => {
-      const sql = 'INSERT INTO user VALUES (?,?,?);';
-      const userinfo = [userInfo.id, userInfo.psword, userInfo.emailAdress];
+      const sql = 'INSERT INTO user VALUES (?,?,?,?);';
+      const userinfo = [
+        userInfo.id,
+        userInfo.id,
+        userInfo.psword,
+        userInfo.emailAdress,
+      ];
       con.query(sql, userinfo, (err, rows) => {
         if (err) {
-          reject(err.errno);
+          reject(err);
         } else resolve({ success: true });
       });
     });
