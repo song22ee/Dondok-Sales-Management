@@ -7,7 +7,7 @@ const User = require('../../models/user');
 const output = {
   home: (req, res) => {
     logger.info(`GET / 200 "home"`);
-    res.render('home/index');
+    res.render('home/index2');
   },
 
   login: (req, res) => {
