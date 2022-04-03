@@ -1,0 +1,127 @@
+@import url(reset.css);
+
+:root {
+    --main-color: #dc9a9b;
+    --main-border: 4px solid var(--main-color);
+}
+
+* {
+    color: var(--main-color);
+    /*background-color: rgba(0, 0, 0, 0.096);*/
+}
+
+body {
+    padding: 0 100px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-header {
+    margin: 40px 0;
+    width: 100%;
+}
+
+.select-box span {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.select-box i {
+    margin-left: 5px;
+}
+
+.main {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar {
+    border: var(--main-border);
+    border-radius: 5px;
+    width: 900px;
+    height: 500px;
+    padding: 15px 5px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendar-header {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 880px;
+    padding: 0 10px;
+}
+
+.calendar-header__month {
+    font-size: 25px;
+}
+
+.returns {
+    font-size: 10px;
+}
+
+.calendar-header__monthly-returns {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.calendar-main {
+    width: 100%;
+    height: 100%;
+    padding: 10px 0 30px 0;
+}
+
+.weeks {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.weeks > div {
+    border: var(--main-border);
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 20px;
+    margin: 0 1px;
+}
+
+.days {
+    width: 100%;
+    height: 100%;
+}
+
+.days__week {
+    display: flex;
+    width: 100%;
+    height: 70px;
+    margin-bottom: 4px;
+}
+
+.day {
+    box-sizing: border-box;
+    border: var(--main-border);
+    border-radius: 3px;
+    margin: 0 1px;
+    padding: 5px;
+    width: 130px;
+    height: 70px;
+}
+
+.daily-returns {
+    margin: 5px 0;
+}
