@@ -5,24 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home/style.css">
     <title>Document</title>
 </head>
 
 <body>
-    <header class="main-header">
-        <div class="select-box">
-            <span>Dondok</span>
-            <i class="fas fa-angle-down fa-2x"></i>
-        </div>
-    </header>
 
     <section class="main">
         <div class="calendar">
 
+            <div class="dondok">
+                <div class="select-box">
+                    <span>Dondok</span>
+                    <!--<i class="fas fa-angle-down fa-2x"></i>-->
+                    <div class="arrow-down"></div>
+                </div>
+            </div>
+
             <div class="calendar-header">
-                <div class="calendar-header__month">
-                    <span>3월</span>
+                <div class="calendar-header__date">
+                    <span class="calendar-header__year">2022</span>
+                    <span class="calendar-header__month">4월</span>
                 </div>
                 <div class="calendar-header__monthly-returns returns">
                     <div class="monthly-returns">
@@ -35,13 +38,13 @@
             <div class="calendar-main">
 
                 <div class="weeks">
-                    <div class="sun">일</div>
-                    <div class="mon">월</div>
-                    <div class="tue">화</div>
-                    <div class="wed">수</div>
-                    <div class="thu">목</div>
-                    <div class="fri">금</div>
-                    <div class="sat">토</div>
+                    <div class="sun"><span>일</span></div>
+                    <div class="mon"><span>월</span></div>
+                    <div class="tue"><span>화</span></div>
+                    <div class="wed"><span>수</span></div>
+                    <div class="thu"><span>목</span></div>
+                    <div class="fri"><span>금</span></div>
+                    <div class="sat"><span>토</span></div>
                 </div>
 
                 <div class="days">
@@ -137,7 +140,7 @@
                                 <span class="daily-returns__figure">9999999</span>
                             </div>
                         </div>
-                        <div class="day">
+                        <div class="day" id="click">
                             <span class="date">0</span>
                             <div class="daily-returns returns">
                                 <span class="daily-returns__title">일일 매출액 : </span>
@@ -360,6 +363,13 @@
 
             </div>
 
+        </div>
+
+        <div class="input-section">
+            <div class="input-box">
+                <span>일일 매출액 :</span>
+                <input type="text" />
+            </div>
         </div>
     </section>
 
