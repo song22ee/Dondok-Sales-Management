@@ -7,7 +7,7 @@ const User = require('../../models/user');
 const output = {
   home: (req, res) => {
     logger.info(`GET / 200 "home"`);
-    res.render('home/index2');
+    res.render('home/index');
   },
 
   login: (req, res) => {
@@ -19,6 +19,11 @@ const output = {
     logger.info(`GET / 200 "finder"`);
     res.render('home/finder');
   },
+
+  main: (req, res) => {
+    logger.info(`GET / 200 "main"`);
+    res.render('home/main');
+  },
 };
 
 const process = {
@@ -26,9 +31,10 @@ const process = {
     const user = new User(req.body, req.session); //constructer(body)로 전달
     const response = await user.login(); //함수 실행
     if (response.err) logger.error(`${response.err}`);
+    // res.session.is_logined = true;
     req.session.save(() => {
       // return res.redirect('/');
-      return res.json(response);
+      return res.json(response.success);
     });
   },
 
