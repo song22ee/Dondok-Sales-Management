@@ -33,7 +33,6 @@ function Register() {
           location.href = '/login';
         } else {
           alert(res.msg);
-          // console.log(res.msg);
         }
       })
       .catch((err) => {

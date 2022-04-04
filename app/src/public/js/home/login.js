@@ -39,10 +39,10 @@ function Login() {
       .then((res) => {
         if (res.success) {
           //로그인 성공 시
-          location.href = '/';
+          location.href = '/main';
         } else {
+          console.log(res.msg);
           alert(res.msg);
-          // console.log(res.msg);
         }
       })
       .catch((err) => {

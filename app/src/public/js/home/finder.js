@@ -1,7 +1,7 @@
 'use strict';
 
 const id = document.querySelector('#id');
-const eamilAdress = document.querySelector('#email');
+const emailAdress = document.querySelector('#email');
 const finderBtn = document.querySelector('#finder');
 
 finderBtn.addEventListener('click', finder);
@@ -9,7 +9,7 @@ finderBtn.addEventListener('click', finder);
 function finder() {
   const req = {
     id: id.value,
-    eamilAdress: eamilAdress.value,
+    emailAdress: emailAdress.value,
   };
 
   fetch('/finder', {
