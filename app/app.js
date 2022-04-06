@@ -4,6 +4,9 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
+const morgan = require('morgan');
+const logger = require('./src/config/logger');
+
 const app = express();
 
 //라우팅
@@ -21,6 +24,7 @@ app.use(express.static(`${__dirname}/src/public`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(sessionConfig);
+app.use(morgan('tiny', { stream: logger.stream }));
 
 //Routes
 app.use('/', home); //use => Middleware

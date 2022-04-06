@@ -2,26 +2,24 @@
 //Logger
 const logger = require('../../config/logger');
 
+//Models
 const User = require('../../models/user');
+const sales = require('../../models/sales');
 
 const output = {
   home: (req, res) => {
-    logger.info(`GET / 200 "home"`);
     res.render('home/index');
   },
 
   login: (req, res) => {
-    logger.info(`GET / 200 "login"`);
     res.render('home/login');
   },
 
   finder: (req, res) => {
-    logger.info(`GET / 200 "finder"`);
     res.render('home/finder');
   },
 
   main: (req, res) => {
-    logger.info(`GET / 200 "main"`);
     res.render('home/main');
   },
 };
@@ -54,9 +52,11 @@ const process = {
     return res.json(response);
   },
 
-  inputsales: (req, res) => {
+  dailysales: async (req, res) => {
     //생각중인 것 table schema month, days, sales, userId(one to many)
-    return res.json('이제 여기다가 데이터를 넣으면 DB에 입력이 됩니다.');
+    const salesInfo = new sales(req, res);
+    const response = await salesInfo.inputSales();
+    return res.json(response);
   },
 };
 

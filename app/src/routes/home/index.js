@@ -15,6 +15,6 @@ router.get('/main', ctrl.output.main);
 router.post('/login', ctrl.process.login);
 router.post('/register', ctrl.process.register);
 router.post('/finder', ctrl.process.finder);
-router.post('/inputsales', ctrl.process.inputsales);
+router.post('/dailysales', ctrl.process.dailysales);
 
 module.exports = router;

@@ -14,7 +14,7 @@ const printFormat = printf(({ timestamp, label, level, message }) => {
 const printLogFormat = {
   file: combine(
     label({
-      label: process.env.NODE_ENV,
+      label: 'Express',
     }),
     timestamp({
       format: 'YYYY-MM-DD HH:mm:dd',
@@ -57,4 +57,9 @@ const logger = createLogger({
 if (process.env.NODE_ENV !== 'production') {
   logger.add(options.console);
 }
+
+logger.stream = {
+  write: (message) => logger.info(message),
+};
+
 module.exports = logger;

@@ -33,7 +33,7 @@ class UserStorage {
 
   static GetUserInfo(id) {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM user WHERE id = ?;';
+      const sql = 'SELECT * FROM user WHERE userid = ?;';
       con.query(sql, [id], (err, rows) => {
         if (err) {
           reject(`${err}`);
@@ -44,7 +44,8 @@ class UserStorage {
 
   static SaveUserInfo(userInfo) {
     return new Promise((resolve, reject) => {
-      const sql = 'INSERT INTO user VALUES (?,?,?,?);';
+      const sql =
+        'INSERT INTO user(userid, username, psword, email) VALUES (?,?,?,?);';
       const userinfo = [
         userInfo.id,
         userInfo.id,

@@ -14,9 +14,10 @@ class user {
     try {
       const user = await Userstorage.GetUserInfo(body.id);
       if (user) {
-        if (user.id) {
-          if (user.id === body.id) {
+        if (user.userid) {
+          if (user.userid === body.id) {
             if (user.psword === body.psword) {
+              session.userId = user.id;
               session.userName = user.username;
               session.is_logined = true;
               response.success = true;
