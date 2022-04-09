@@ -10,6 +10,7 @@ router.get('/', ctrl.output.home);
 router.get('/login', ctrl.output.login);
 router.get('/finder', ctrl.output.finder);
 router.get('/main', ctrl.output.main);
+router.get('/logout', ctrl.auth.logout);
 
 //POST
 router.post('/login', ctrl.process.login);

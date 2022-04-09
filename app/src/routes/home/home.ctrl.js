@@ -19,8 +19,11 @@ const output = {
     res.render('home/finder');
   },
 
-  main: (req, res) => {
-    res.render('home/main');
+  main: async (req, res) => {
+    const salesInfo = new sales(req, res);
+    const response = await salesInfo.main();
+    console.log(response);
+    res.render('home/main', { data: response.data });
   },
 };
 
@@ -60,7 +63,16 @@ const process = {
   },
 };
 
+const auth = {
+  logout: (req, res) => {
+    req.session.destroy((err) => {
+      res.redirect('/login');
+    });
+  },
+};
+
 module.exports = {
   output,
   process,
+  auth,
 };

@@ -7,6 +7,16 @@ class sales {
     this.res = res;
   }
 
+  async main() {
+    const session = this.req.session;
+    try {
+      const salesInfo = await SalesStorage.GetSalesInfo(session.userId);
+      return { success: true, data: salesInfo };
+    } catch (err) {
+      return { success: false, msg: '오류', err };
+    }
+  }
+
   async inputSales() {
     const req = this.req;
     const session = this.req.session;
