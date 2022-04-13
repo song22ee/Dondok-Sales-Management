@@ -1,3 +1,5 @@
+'use strict';
+
 let date = new Date(); //현재 날짜와 시간
 
 //현재 년도와 날짜
@@ -10,7 +12,7 @@ const renderCalendar = () => {
 
   // TestCode
   console.log(viewYear, viewMonth);
-  // console.log(data);
+  console.log(document.cookie);
 
   //지난달의 마지막 날의 Date 객체
   const prevLast = new Date(viewYear, viewMonth - 1, 0); //2022년 3월 31일

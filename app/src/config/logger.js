@@ -3,7 +3,7 @@
 const { createLogger, transports, format } = require('winston');
 const path = require('path');
 require('winston-daily-rotate-file');
-const { combine, timestamp, colorize, json, simple, printf, label } = format;
+const { combine, timestamp, colorize, simple, printf, label } = format;
 
 //Log print
 const printFormat = printf(({ timestamp, label, level, message }) => {

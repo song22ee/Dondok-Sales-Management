@@ -20,46 +20,54 @@ const output = {
   },
 
   table: async (req, res) => {
-    const salesInfo = new sales(req, res);
-    const response = await salesInfo.table();
-    console.log(response);
-    res.render('home/table', { data: response.data });
+    res.render('home/table', {
+      user: req.session.userName,
+    });
   },
 };
 
 const process = {
-  login: async (req, res) => {
-    const user = new User(req.body, req.session); //constructer(body)로 전달
-    const response = await user.login(); //함수 실행
-    if (response.success) {
-      req.session.save(() => {
-        // return res.redirect('/main');
+  post: {
+    login: async (req, res) => {
+      const user = new User(req.body, req.session); //constructer(body)로 전달
+      const response = await user.login(); //함수 실행
+      if (response.success) {
+        req.session.save(() => {
+          // return res.redirect('/main');
+          return res.json(response);
+        });
+      } else {
+        if (response.err) logger.error(`${response.err}`);
         return res.json(response);
-      });
-    } else {
+      }
+    },
+
+    register: async (req, res) => {
+      const user = new User(req.body); //constructer(body)로 전달
+      const response = await user.register(); //함수 실행
       if (response.err) logger.error(`${response.err}`);
       return res.json(response);
-    }
-  },
+    },
 
-  register: async (req, res) => {
-    const user = new User(req.body); //constructer(body)로 전달
-    const response = await user.register(); //함수 실행
-    if (response.err) logger.error(`${response.err}`);
-    return res.json(response);
-  },
+    finder: async (req, res) => {
+      const userInfo = new User(req.body);
+      const response = await userInfo.finder();
+      return res.json(response);
+    },
 
-  finder: async (req, res) => {
-    const userInfo = new User(req.body);
-    const response = await userInfo.finder();
-    return res.json(response);
+    dailySales: async (req, res) => {
+      //생각중인 것 table schema month, days, sales, userId(one to many)
+      const salesInfo = new sales(req, res);
+      const response = await salesInfo.inputSales();
+      return res.json(response);
+    },
   },
-
-  dailysales: async (req, res) => {
-    //생각중인 것 table schema month, days, sales, userId(one to many)
-    const salesInfo = new sales(req, res);
-    const response = await salesInfo.inputSales();
-    return res.json(response);
+  get: {
+    dailySales: async (req, res) => {
+      const salesInfo = new sales(req, res);
+      const response = await salesInfo.table();
+      return res.json(response);
+    },
   },
 };
 
