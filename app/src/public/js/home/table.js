@@ -3,15 +3,19 @@ let date = new Date(); //현재 날짜와 시간
 //현재 년도와 날짜
 const renderCalendar = () => {
   const viewYear = date.getFullYear(); //2022년
-  const viewMonth = date.getMonth(); //3월 (0부터 시작)
+  const viewMonth = date.getMonth() + 1; //3월 (0부터 시작)
 
   document.querySelector('.year-month').textContent =
-    viewYear + '년 ' + (viewMonth + 1) + '월';
+    viewYear + '년 ' + viewMonth + '월';
+
+  // TestCode
+  console.log(viewYear, viewMonth);
+  // console.log(data);
 
   //지난달의 마지막 날의 Date 객체
-  const prevLast = new Date(viewYear, viewMonth, 0); //2022년 3월 31일
+  const prevLast = new Date(viewYear, viewMonth - 1, 0); //2022년 3월 31일
   //이번달의 마지막 날의 Date 객체
-  const thisLast = new Date(viewYear, viewMonth + 1, 0); //2022 4월 30일
+  const thisLast = new Date(viewYear, viewMonth, 0); //2022 4월 30일
 
   const PLDate = prevLast.getDate(); //지난달 마지막 달의 날짜 -31일
   const PLDay = prevLast.getDay(); //getDay()는 요일을 반환, 목요일 (0은 일요일)
@@ -45,10 +49,11 @@ const renderCalendar = () => {
   const dates = prevDates.concat(thisDates, nextDates);
 
   const dailyReturns__text = '일일 매출액 : ';
-  let dailyReturns__figure = '';
+  const dailyReturns__figure = '';
+
   //주간 매출액을 일요일만 뜨게 해야함.
   const weeklyReturns__text = '주간 매출액 : ';
-  let weeklyReturns__figure = '';
+  const weeklyReturns__figure = '';
 
   //지난 날짜, 다음 날짜 흐리게
   const firstDateIndex = dates.indexOf(1); //5 (1일)
@@ -74,7 +79,7 @@ const renderCalendar = () => {
 
   // 오늘 날짜 그리기
   const today = new Date();
-  if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
+  if (viewMonth - 1 === today.getMonth() && viewYear === today.getFullYear()) {
     for (let date of document.querySelectorAll('.this')) {
       if (+date.innerText === today.getDate()) {
         date.classList.add('today');

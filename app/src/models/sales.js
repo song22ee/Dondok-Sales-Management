@@ -7,7 +7,7 @@ class sales {
     this.res = res;
   }
 
-  async main() {
+  async table() {
     const session = this.req.session;
     try {
       const salesInfo = await SalesStorage.GetSalesInfo(session.userId);

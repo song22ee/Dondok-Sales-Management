@@ -19,11 +19,11 @@ const output = {
     res.render('home/finder');
   },
 
-  main: async (req, res) => {
+  table: async (req, res) => {
     const salesInfo = new sales(req, res);
-    const response = await salesInfo.main();
+    const response = await salesInfo.table();
     console.log(response);
-    res.render('home/main', { data: response.data });
+    res.render('home/table', { data: response.data });
   },
 };
 
@@ -66,6 +66,7 @@ const process = {
 const auth = {
   logout: (req, res) => {
     req.session.destroy((err) => {
+      if (err) logger.error(`${err}`);
       res.redirect('/login');
     });
   },

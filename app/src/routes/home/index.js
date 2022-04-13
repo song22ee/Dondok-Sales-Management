@@ -9,7 +9,7 @@ const ctrl = require('./home.ctrl');
 router.get('/', ctrl.output.home);
 router.get('/login', ctrl.output.login);
 router.get('/finder', ctrl.output.finder);
-router.get('/main', ctrl.output.main);
+router.get('/table', ctrl.output.table);
 router.get('/logout', ctrl.auth.logout);
 
 //POST

@@ -39,7 +39,7 @@ function Login() {
       .then((res) => {
         if (res.success) {
           //로그인 성공 시
-          location.href = '/main';
+          location.href = '/table';
         } else {
           console.log(res.msg);
           alert(res.msg);
