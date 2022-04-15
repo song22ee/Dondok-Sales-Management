@@ -12,7 +12,7 @@ class SalesStorage {
       con.query(sql, [userid], (err, rows) => {
         if (err) {
           reject(err);
-        } else resolve(rows[0]);
+        } else resolve(rows);
       });
     });
   }

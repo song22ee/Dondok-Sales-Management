@@ -3,17 +3,18 @@
 let date = new Date(); //현재 날짜와 시간
 
 //현재 년도와 날짜
-const renderCalendar = () => {
+const renderCalendar = async () => {
   const viewYear = date.getFullYear(); //2022년
   const viewMonth = date.getMonth() + 1; //3월 (0부터 시작)
 
   document.querySelector('.year-month').textContent =
     viewYear + '년 ' + viewMonth + '월';
 
-  // TestCode
-  console.log(viewYear, viewMonth);
-  console.log(document.cookie);
-
+  ///////////////////////////////// TestCode
+  /////////////////////////////////
+  const salesData = await SalesData();
+  /////////////////////////////////
+  /////////////////////////////////
   //지난달의 마지막 날의 Date 객체
   const prevLast = new Date(viewYear, viewMonth - 1, 0); //2022년 3월 31일
   //이번달의 마지막 날의 Date 객체
@@ -51,7 +52,6 @@ const renderCalendar = () => {
   const dates = prevDates.concat(thisDates, nextDates);
 
   const dailyReturns__text = '일일 매출액 : ';
-  const dailyReturns__figure = '';
 
   //주간 매출액을 일요일만 뜨게 해야함.
   const weeklyReturns__text = '주간 매출액 : ';
@@ -61,8 +61,21 @@ const renderCalendar = () => {
   const firstDateIndex = dates.indexOf(1); //5 (1일)
   const lastDateIndex = dates.lastIndexOf(TLDate); //34 (30일)
   dates.forEach((date, i) => {
+    const day = i - firstDateIndex + 1;
     const condition =
       i >= firstDateIndex && i < lastDateIndex + 1 ? 'this' : 'other';
+    const salesOfDay = salesData
+      .filter((item) => {
+        if (
+          item.year === viewYear &&
+          item.month === viewMonth &&
+          item.days === day
+        ) {
+          return item;
+        }
+      })
+      .map((item) => item.sales);
+    const dailyReturns__figure = [salesOfDay[0]];
 
     dates[i] = `<div class="date ${condition}">
       <span class="${condition}">${date}</span>
@@ -108,3 +121,22 @@ const goToday = () => {
   date = new Date();
   renderCalendar();
 };
+
+function SalesData() {
+  // console.log('이거 잘됨.');
+  return fetch('/salesdata', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.success) {
+        return res.data;
+      } else {
+        alert(res.msg);
+      }
+    })
+    .catch((err) => {
+      console.error(new Error('로그인 에러'));
+    });
+}
