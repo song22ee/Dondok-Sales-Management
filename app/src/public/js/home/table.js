@@ -1,5 +1,7 @@
 'use strict';
 
+const outputMonth = document.querySelector('#salesOfMonth');
+
 let date = new Date(); //현재 날짜와 시간
 
 //현재 년도와 날짜
@@ -10,11 +12,9 @@ const renderCalendar = async () => {
   document.querySelector('.year-month').textContent =
     viewYear + '년 ' + viewMonth + '월';
 
-  ///////////////////////////////// TestCode
-  /////////////////////////////////
-  const salesData = await SalesData();
-  /////////////////////////////////
-  /////////////////////////////////
+  const response = await SalesData(viewYear, viewMonth);
+  outputMonth.innerHTML = response.total;
+
   //지난달의 마지막 날의 Date 객체
   const prevLast = new Date(viewYear, viewMonth - 1, 0); //2022년 3월 31일
   //이번달의 마지막 날의 Date 객체
@@ -61,15 +61,15 @@ const renderCalendar = async () => {
   const firstDateIndex = dates.indexOf(1); //5 (1일)
   const lastDateIndex = dates.lastIndexOf(TLDate); //34 (30일)
   dates.forEach((date, i) => {
-    const day = i - firstDateIndex + 1;
     const condition =
       i >= firstDateIndex && i < lastDateIndex + 1 ? 'this' : 'other';
-    const salesOfDay = salesData
+    // ProcessSalesData(data.salesData, viewYear, viewMonth);
+    const salesOfDay = response.data
       .filter((item) => {
         if (
           item.year === viewYear &&
           item.month === viewMonth &&
-          item.days === day
+          item.days === date
         ) {
           return item;
         }
@@ -81,7 +81,7 @@ const renderCalendar = async () => {
       <span class="${condition}">${date}</span>
       <div class="daily-returns returns">
           <span class="daily-returns__title ${condition}">${dailyReturns__text}</span>
-          <span class="daily-returns__figure ${condition}">${dailyReturns__figure}</span>
+          <span id="salesOfDaily" class="daily-returns__figure ${condition}">${dailyReturns__figure}</span>
       </div>
       <div class="weekly-returns returns">
           <span class="weekly-returns__title ${condition}">${weeklyReturns__text}</span>
@@ -122,16 +122,16 @@ const goToday = () => {
   renderCalendar();
 };
 
-function SalesData() {
+function SalesData(year, month) {
   // console.log('이거 잘됨.');
-  return fetch('/salesdata', {
+  return fetch(`/salesdata/${year}/${month}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   })
     .then((res) => res.json())
     .then((res) => {
       if (res.success) {
-        return res.data;
+        return res;
       } else {
         alert(res.msg);
       }

@@ -13,7 +13,7 @@ router.get('/finder', ctrl.output.finder);
 router.get('/table', ctrl.output.table);
 
 router.get('/logout', ctrl.auth.logout);
-router.get('/salesdata', ctrl.process.get.dailySales);
+router.get('/salesdata/:year/:month', ctrl.process.get.dailySales);
 
 //POST
 router.post('/login', ctrl.process.post.login);

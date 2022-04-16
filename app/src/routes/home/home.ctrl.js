@@ -19,7 +19,7 @@ const output = {
     res.render('home/finder');
   },
 
-  table: async (req, res) => {
+  table: (req, res) => {
     res.render('home/table', {
       user: req.session.userName,
     });
@@ -66,7 +66,12 @@ const process = {
     dailySales: async (req, res) => {
       const salesInfo = new sales(req, res);
       const response = await salesInfo.table();
-      return res.json(response);
+      const salesOfMonth = await salesInfo.processSalesData(response.data);
+      response.total = salesOfMonth;
+      if (response.success) return res.json(response);
+      else {
+        if (response.err) logger.error(`${response.err}`);
+      }
     },
   },
 };

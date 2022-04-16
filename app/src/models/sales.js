@@ -9,8 +9,14 @@ class sales {
 
   async table() {
     const session = this.req.session;
+    const year = this.req.params.year;
+    const month = this.req.params.month;
     try {
-      const salesInfo = await SalesStorage.GetSalesInfo(session.userId);
+      const salesInfo = await SalesStorage.GetSalesMonth(
+        session.userId,
+        year,
+        month
+      );
       return { success: true, data: salesInfo };
     } catch (err) {
       return { success: false, msg: '오류', err };
@@ -26,6 +32,15 @@ class sales {
     } catch (err) {
       return { success: false, msg: '입력 오류', err };
     }
+  }
+
+  //test code
+  async processSalesData(data) {
+    const salesOfMonth = data.reduce((result, info) => {
+      result = result + info.sales;
+      return result;
+    }, 0);
+    return salesOfMonth;
   }
 }
 
