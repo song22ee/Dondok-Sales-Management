@@ -1,4 +1,8 @@
-'use strict';
+('use strict');
+
+function goInput() {
+  console.log('goInput() 실행 : input화면으로 넘어가기');
+}
 
 const outputMonth = document.querySelector('#salesOfMonth');
 
@@ -77,7 +81,7 @@ const renderCalendar = async () => {
       .map((item) => item.sales);
     const dailyReturns__figure = [salesOfDay[0]];
 
-    dates[i] = `<div class="date ${condition}">
+    dates[i] = `<a class="date ${condition}" onclick="goInput()">
       <span class="${condition}">${date}</span>
       <div class="daily-returns returns">
           <span class="daily-returns__title ${condition}">${dailyReturns__text}</span>
@@ -87,7 +91,7 @@ const renderCalendar = async () => {
           <span class="weekly-returns__title ${condition}">${weeklyReturns__text}</span>
           <span class="weekly-returns__figure ${condition}">${weeklyReturns__figure}</span>
       </div>
-    </div>`;
+    </a>`;
   });
 
   document.querySelector('.dates').innerHTML = dates.join('');
@@ -140,3 +144,30 @@ function SalesData(year, month) {
       console.error(new Error('로그인 에러'));
     });
 }
+
+//login 버튼 뜨게하고 나머지 뿌옇게 하기
+let arrowDown = document.getElementsByClassName('arrow-down')[0];
+let logout = document.getElementById('logout');
+
+function arrowClick() {
+  arrowDown.classList.toggle('arrow_click');
+
+  if (arrowDown.classList.contains('arrow_click')) {
+    document.getElementsByClassName('calendar')[0].style.opacity = '0.5';
+    logout.style.display = 'block';
+  } else {
+    document.getElementsByClassName('calendar')[0].style.opacity = '1';
+    logout.style.display = 'none';
+  }
+}
+
+//반응형 달력
+
+// let datesHeight = $('.dates').offset().top - $('.2ndDiv').offset().top;
+
+// console.log($('.dates').offset().top);
+// console.log($('.2ndDiv').offset().top);
+// console.log(datesHeight);
+
+// let dates = document.getElementsByClassName('dates')[0];
+// console.log();
