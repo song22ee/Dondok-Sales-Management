@@ -8,23 +8,25 @@
     <link rel="stylesheet" href="/css/home/style.css">
     <script src="https://kit.fontawesome.com/73fbcb87e6.js" crossorigin="anonymous"></script>
     <script src="/js/home/table.js" defer></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <title>Document</title>
 </head>
 
 <body>
-
     <section class="main">
-        <div class="calendar">
 
-            <div class="dondok">
-                <div class="select-box">
-                    <span>
-                        <%= user %>
-                    </span>
-                    <!--<i class="fas fa-angle-down fa-2x"></i>-->
-                    <div class="arrow-down"></div>
-                </div>
+        <div class="dondok">
+            <div class="select-box">
+                <span class="id-name">
+                    <%= user %>
+                </span>
+                <!--<i class="fas fa-angle-down fa-2x"></i>-->
+                <div class="arrow-down" onclick="arrowClick()"></div>
             </div>
+            <div id="logout"><span>logout</span></div>
+        </div>
+
+        <div class="calendar">
 
             <div class="calendar-header">
                 <div class="nav">
@@ -53,39 +55,11 @@
                     <div class="sat"><span>토</span></div>
                 </div>
 
-                <!--<div class="days">
-
-                    <div class="days__week">
-
-                        <div class="day">
-                            <span class="date">0</span>
-                            <div class="daily-returns returns">
-                                <span class="daily-returns__title">일일 매출액 : </span>
-                                <span class="daily-returns__figure">9999999</span>
-                            </div>
-
-                            <div class="weekly-returns returns">
-                                <span class="weekly-returns__title">주간 매출액 : </span>
-                                <span class="weekly-returns__figure">9999999</span>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </div>-->
                 <div class="dates"></div>
-
+                <div class="2ndDiv" style="width:100%;height:5px;overflow:hidden;"></div>
             </div>
 
         </div>
-
-        <!-- <div class="input-section">
-            <div class="input-box">
-                <span>일일 매출액 :</span>
-                <input type="text" />
-            </div>
-        </div> -->
 
 
     </section>
