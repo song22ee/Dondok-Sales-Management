@@ -1,62 +1,50 @@
 <!DOCTYPE html>
 <html lang="kor">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/home/style.css">
-    <script src="https://kit.fontawesome.com/73fbcb87e6.js" crossorigin="anonymous"></script>
-    <script src="/js/home/table.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/home/style.css" />
+    <link rel="stylesheet" href="/css/home/input.css" />
+    <script
+      src="https://kit.fontawesome.com/73fbcb87e6.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script src="/js/home/table.js" defer></script> -->
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
+    <p><%= JSON.stringify(data) %></p>
     <section class="main">
+      <div class="dondok">
+        <div class="select-box">
+          <span class="id-name"> <%= user %> </span>
+          <!--<i class="fas fa-angle-down fa-2x"></i>-->
+          <div class="arrow-down" onclick="arrowClick()"></div>
+        </div>
+        <div id="logout"><span>logout</span></div>
+      </div>
 
-        <div class="dondok">
-            <div class="select-box">
-                <span class="id-name">
-                    <%= user %>
-                </span>
-                <!--<i class="fas fa-angle-down fa-2x"></i>-->
-                <div class="arrow-down" onclick="arrowClick()"></div>
+      <div class="calendar input-screen">
+        <div class="input-main">
+          <div class="input-date">
+            <span>2022년 3월 17일 매출전표</span>
+          </div>
+
+          <div class="input-section">
+            <div class="input-box">
+              <span>일일 매출액 :</span>
+              <input type="text" />
             </div>
-            <div id="logout"><span>logout</span></div>
+          </div>
         </div>
 
-        <div class="calendar input-screen">
-
-            <div class="input-main">
-                <div class="input-date">
-                    <span>2022년 3월 17일 매출전표</span>
-                </div>
-
-                <div class="input-section">
-                    <div class="input-box">
-                        <span>일일 매출액 :</span>
-                        <input type="text" />
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="input-button">
-                <button>취소</button>
-                <button>수정</button>
-            </div>
-
-
-
+        <div class="input-button">
+          <button>취소</button>
+          <button>수정</button>
         </div>
-
-
-
-
+      </div>
     </section>
-
-
-</body>
-
+  </body>
 </html>

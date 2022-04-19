@@ -29,6 +29,18 @@ class SalesStorage {
     });
   }
 
+  static GetSalesDay(userid, year, month, day) {
+    return new Promise((resolve, reject) => {
+      const sql =
+        'SELECT * FROM Sales WHERE userId = ? AND year = ? AND month = ? AND days = ?;';
+      con.query(sql, [userid, year, month, day], (err, rows) => {
+        if (err) {
+          reject(`${err}`);
+        } else resolve(rows);
+      });
+    });
+  }
+
   static SaveSalesInfo(salesInfo, userId) {
     return new Promise((resolve, reject) => {
       const sql =

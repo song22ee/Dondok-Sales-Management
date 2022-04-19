@@ -4,7 +4,7 @@ const logger = require('../../config/logger');
 
 //Models
 const User = require('../../models/user');
-const sales = require('../../models/sales');
+const Sales = require('../../models/sales');
 
 const output = {
   home: (req, res) => {
@@ -55,21 +55,33 @@ const process = {
       return res.json(response);
     },
 
-    dailySales: async (req, res) => {
+    sales: async (req, res) => {
       //생각중인 것 table schema month, days, sales, userId(one to many)
-      const salesInfo = new sales(req, res);
+      const salesInfo = new Sales(req, res);
       const response = await salesInfo.inputSales();
       return res.json(response);
     },
   },
   get: {
-    dailySales: async (req, res) => {
-      const salesInfo = new sales(req, res);
+    monthInfo: async (req, res) => {
+      const salesInfo = new Sales(req, res);
       const response = await salesInfo.table();
       const salesOfMonth = await salesInfo.processSalesData(response.data);
       response.total = salesOfMonth;
       if (response.success) return res.json(response);
       else {
+        if (response.err) logger.error(`${response.err}`);
+      }
+    },
+    dayInfo: async (req, res) => {
+      const salesInfo = new Sales(req, res);
+      const response = await salesInfo.dayInfo();
+      if (response.success) {
+        res.render('home/input', {
+          user: req.session.userName,
+          data: response.data,
+        });
+      } else {
         if (response.err) logger.error(`${response.err}`);
       }
     },

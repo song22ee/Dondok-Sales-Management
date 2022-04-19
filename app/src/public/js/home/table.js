@@ -1,8 +1,4 @@
-('use strict');
-
-function goInput() {
-  console.log('goInput() 실행 : input화면으로 넘어가기');
-}
+'use strict';
 
 const outputMonth = document.querySelector('#salesOfMonth');
 
@@ -81,7 +77,9 @@ const renderCalendar = async () => {
       .map((item) => item.sales);
     const dailyReturns__figure = [salesOfDay[0]];
 
-    dates[i] = `<a class="date ${condition}" onclick="goInput()">
+    dates[
+      i
+    ] = `<a href="/table/${viewYear}/${viewMonth}/${date}" id=dayInfo class="date ${condition}" onclick="dayInfo(${viewYear},${viewMonth},${date},)">
       <span class="${condition}">${date}</span>
       <div class="daily-returns returns">
           <span class="daily-returns__title ${condition}">${dailyReturns__text}</span>
@@ -127,8 +125,7 @@ const goToday = () => {
 };
 
 function SalesData(year, month) {
-  // console.log('이거 잘됨.');
-  return fetch(`/salesdata/${year}/${month}`, {
+  return fetch(`/table/${year}/${month}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   })
@@ -146,8 +143,8 @@ function SalesData(year, month) {
 }
 
 //login 버튼 뜨게하고 나머지 뿌옇게 하기
-let arrowDown = document.getElementsByClassName('arrow-down')[0];
-let logout = document.getElementById('logout');
+const arrowDown = document.getElementsByClassName('arrow-down')[0];
+const logout = document.getElementById('logout');
 
 function arrowClick() {
   arrowDown.classList.toggle('arrow_click');
