@@ -135,6 +135,7 @@ function SalesData(year, month) {
         return res;
       } else {
         alert(res.msg);
+        location.href = '/login';
       }
     })
     .catch((err) => {

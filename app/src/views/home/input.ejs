@@ -10,12 +10,15 @@
       src="https://kit.fontawesome.com/73fbcb87e6.js"
       crossorigin="anonymous"
     ></script>
+    <script src="/js/home/input.js" defer></script>
     <!-- <script src="/js/home/table.js" defer></script> -->
     <title>Document</title>
   </head>
 
   <body>
-    <p><%= JSON.stringify(data) %></p>
+    <input id="year" type="hidden" value="<%= data[0].year %>" />
+    <input id="month" type="hidden" value="<%= data[0].month %>" />
+    <input id="days" type="hidden" value="<%= data[0].days %>" />
     <section class="main">
       <div class="dondok">
         <div class="select-box">
@@ -29,20 +32,29 @@
       <div class="calendar input-screen">
         <div class="input-main">
           <div class="input-date">
-            <span>2022년 3월 17일 매출전표</span>
+            <span
+              ><%= data[0].year %>년 <%= data[0].month %>월 <%= data[0].days
+              %>일 매출전표</span
+            >
           </div>
 
           <div class="input-section">
             <div class="input-box">
               <span>일일 매출액 :</span>
-              <input type="text" />
+              <input
+                id="sales"
+                type="text"
+                class="input"
+                value="<%=data[0].sales %>"
+                placeholder="<%=data[0].sales %>"
+              />
             </div>
           </div>
         </div>
 
         <div class="input-button">
-          <button>취소</button>
-          <button>수정</button>
+          <button id="cancel">취소</button>
+          <button id="update">수정</button>
         </div>
       </div>
     </section>

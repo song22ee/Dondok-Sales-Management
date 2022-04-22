@@ -23,5 +23,6 @@ router.post('/finder', ctrl.process.post.finder);
 router.post('/sales', ctrl.process.post.sales);
 
 //UPDATE
+router.put('/sales', ctrl.process.put.sales);
 
 module.exports = router;

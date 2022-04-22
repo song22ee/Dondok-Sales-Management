@@ -62,16 +62,18 @@ const process = {
       return res.json(response);
     },
   },
+
   get: {
     monthInfo: async (req, res) => {
       const salesInfo = new Sales(req, res);
-      const response = await salesInfo.table();
-      const salesOfMonth = await salesInfo.processSalesData(response.data);
-      response.total = salesOfMonth;
-      if (response.success) return res.json(response);
-      else {
+      const response = await salesInfo.monthInfo();
+      if (response.success) {
+        const salesOfMonth = await salesInfo.processSalesData(response.data);
+        response.total = salesOfMonth;
+      } else {
         if (response.err) logger.error(`${response.err}`);
       }
+      return res.json(response);
     },
     dayInfo: async (req, res) => {
       const salesInfo = new Sales(req, res);
@@ -84,6 +86,15 @@ const process = {
       } else {
         if (response.err) logger.error(`${response.err}`);
       }
+    },
+  },
+
+  put: {
+    sales: async (req, res) => {
+      const salesInfo = new Sales(req, res);
+      const response = await salesInfo.updateSales();
+      if (response.err) logger.error(`${response.err}`);
+      return res.json(response);
     },
   },
 };

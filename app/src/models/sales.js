@@ -7,17 +7,17 @@ class Sales {
     this.res = res;
   }
 
-  async table() {
+  async monthInfo() {
+    const req = this.req;
     const session = this.req.session;
-    const year = this.req.params.year;
-    const month = this.req.params.month;
     try {
-      const salesInfo = await SalesStorage.GetSalesMonth(
-        session.userId,
-        year,
-        month
+      const monthInfo = await SalesStorage.GetSalesMonth(
+        req.params,
+        session.userId
       );
-      return { success: true, data: salesInfo };
+      if (monthInfo[0]) {
+        return { success: true, data: monthInfo };
+      } else return { success: false, msg: '로그인이 필요합니다.' };
     } catch (err) {
       return { success: false, msg: '오류', err };
     }
@@ -26,17 +26,14 @@ class Sales {
   async dayInfo() {
     const req = this.req;
     const session = req.session;
-    const year = req.params.year;
-    const month = req.params.month;
-    const day = req.params.day;
+    console.log(session);
     try {
       const dayInfo = await SalesStorage.GetSalesDay(
-        session.userId,
-        year,
-        month,
-        day
+        req.params,
+        session.userId
       );
-      return { success: true, data: dayInfo };
+      if (dayInfo[0]) return { success: true, data: dayInfo };
+      else return { success: false, msg: '로그인이 필요합니다.' };
     } catch (err) {
       return { success: false, msg: '오류', err };
     }
@@ -48,6 +45,18 @@ class Sales {
     try {
       await SalesStorage.SaveSalesInfo(req.body, session.userId);
       return { success: true, msg: '입력완료.' };
+    } catch (err) {
+      return { success: false, msg: '입력 오류', err };
+    }
+  }
+
+  async updateSales() {
+    const req = this.req;
+    const session = req.session;
+    console.log(session);
+    try {
+      await SalesStorage.UpdateSalesInfo(req.body, session.userId);
+      return { success: true, msg: '수정완료.' };
     } catch (err) {
       return { success: false, msg: '입력 오류', err };
     }

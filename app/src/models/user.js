@@ -13,6 +13,7 @@ class user {
     const response = {};
     try {
       const user = await Userstorage.GetUserInfo(body.id);
+      console.log(user);
       if (user) {
         if (user.userid) {
           if (user.userid === body.id) {
