@@ -1,6 +1,7 @@
 'use strict';
-//Logger
+//Config
 const logger = require('../../config/logger');
+const jwt = require('../../config/jwt');
 
 //Models
 const User = require('../../models/user');
@@ -33,9 +34,12 @@ const process = {
       const response = await user.login(); //함수 실행
       if (response.success) {
         req.session.save(() => {
-          // return res.redirect('/main');
           return res.json(response);
         });
+        // const jwtToken = await jwt.sign(response.data);
+        // console.log(jwtToken);
+        // response.token = jwtToken;
+        // return res.json(response);
       } else {
         if (response.err) logger.error(`${response.err}`);
         return res.json(response);

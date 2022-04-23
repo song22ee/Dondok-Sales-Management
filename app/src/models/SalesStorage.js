@@ -71,12 +71,11 @@ class SalesStorage {
       const salesinfo = [
         salesInfo.sales,
         userid,
-        salesInfo.sales_Years,
-        salesInfo.sales_Month,
-        salesInfo.sales_Days,
+        salesInfo.year,
+        salesInfo.month,
+        salesInfo.days,
       ];
       con.query(sql, salesinfo, (err, rows) => {
-        console.log(rows);
         if (err) {
           reject(err);
         } else resolve({ success: true });

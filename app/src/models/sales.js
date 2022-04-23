@@ -15,9 +15,7 @@ class Sales {
         req.params,
         session.userId
       );
-      if (monthInfo[0]) {
-        return { success: true, data: monthInfo };
-      } else return { success: false, msg: '로그인이 필요합니다.' };
+      return { success: true, data: monthInfo };
     } catch (err) {
       return { success: false, msg: '오류', err };
     }
@@ -26,7 +24,7 @@ class Sales {
   async dayInfo() {
     const req = this.req;
     const session = req.session;
-    console.log(session);
+    // console.log(session);
     try {
       const dayInfo = await SalesStorage.GetSalesDay(
         req.params,
@@ -53,7 +51,6 @@ class Sales {
   async updateSales() {
     const req = this.req;
     const session = req.session;
-    console.log(session);
     try {
       await SalesStorage.UpdateSalesInfo(req.body, session.userId);
       return { success: true, msg: '수정완료.' };

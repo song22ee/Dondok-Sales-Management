@@ -79,7 +79,7 @@ const renderCalendar = async () => {
 
     dates[
       i
-    ] = `<a href="/table/${viewYear}/${viewMonth}/${date}" id=dayInfo class="date ${condition}" onclick="dayInfo(${viewYear},${viewMonth},${date},)">
+    ] = `<a href="/table/${viewYear}/${viewMonth}/${date}" id=dayInfo class="date ${condition}" >
       <span class="${condition}">${date}</span>
       <div class="daily-returns returns">
           <span class="daily-returns__title ${condition}">${dailyReturns__text}</span>

@@ -2,6 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
+// const auth = require('../middlewares/auth');
+const sessionAuth = require('../middlewares/sessionauth');
 
 //Controller
 const ctrl = require('./home.ctrl');
@@ -13,16 +15,24 @@ router.get('/finder', ctrl.output.finder);
 router.get('/table', ctrl.output.table);
 
 router.get('/logout', ctrl.auth.logout);
-router.get('/table/:year/:month', ctrl.process.get.monthInfo);
-router.get('/table/:year/:month/:day', ctrl.process.get.dayInfo);
+router.get(
+  '/table/:year/:month',
+  sessionAuth.checkSession,
+  ctrl.process.get.monthInfo
+);
+router.get(
+  '/table/:year/:month/:day',
+  sessionAuth.checkSession,
+  ctrl.process.get.dayInfo
+);
 
 //POST
 router.post('/login', ctrl.process.post.login);
 router.post('/register', ctrl.process.post.register);
 router.post('/finder', ctrl.process.post.finder);
-router.post('/sales', ctrl.process.post.sales);
+router.post('/sales', sessionAuth.checkSession, ctrl.process.post.sales);
 
 //UPDATE
-router.put('/sales', ctrl.process.put.sales);
+router.put('/salestest', sessionAuth.checkSession, ctrl.process.put.sales);
 
 module.exports = router;

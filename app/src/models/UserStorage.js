@@ -7,19 +7,6 @@ const con = mysqlConnection.init(config);
 mysqlConnection.open(con);
 
 class UserStorage {
-  // static #GetUsers(isAll, data, fields) {
-  //   const users = JSON.parse(data);
-  //   if (isAll) return users;
-  //   const newUsers = fields.reduce((newusers, field) => {
-  //     if (users.hasOwnProperty(field)) {
-  //       newusers[field] = users[field];
-  //       //newUsers배열의 fields 키 value에는 users배열중 field와 동일명의 키 value 값이 들어간다.
-  //     }
-  //     return newusers;
-  //   }, {});
-  //   return newUsers;
-  // }
-
   static GetUsers() {
     return new Promise((resolve, reject) => {
       const sql = 'SELECT * FROM user;';

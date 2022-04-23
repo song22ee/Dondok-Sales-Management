@@ -22,6 +22,7 @@ class user {
               session.userName = user.username;
               session.is_logined = true;
               response.success = true;
+              // response.data = user;
               return response;
             }
             response.success = false;

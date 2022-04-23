@@ -17,8 +17,8 @@ function Sales() {
     days: daysInfo.value,
     sales: salesInfo.value,
   };
-  fetch('/login', {
-    method: 'POST',
+  fetch('/salestest', {
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(req),
   })
