@@ -1,7 +1,7 @@
 'use strict';
 //Config
 const logger = require('../../config/logger');
-const jwt = require('../../config/jwt');
+// const jwt = require('../../config/jwt');
 
 //Models
 const User = require('../../models/user');
@@ -72,7 +72,9 @@ const process = {
       const salesInfo = new Sales(req, res);
       const response = await salesInfo.monthInfo();
       if (response.success) {
-        const salesOfMonth = await salesInfo.processSalesData(response.data);
+        const salesOfMonth = await salesInfo.processSalesData_Month(
+          response.data
+        );
         response.total = salesOfMonth;
       } else {
         if (response.err) logger.error(`${response.err}`);

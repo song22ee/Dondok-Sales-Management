@@ -59,13 +59,14 @@ class Sales {
     }
   }
 
-  async processSalesData(data) {
+  async processSalesData_Month(data) {
     const salesOfMonth = data.reduce((result, info) => {
       result = result + info.sales;
       return result;
     }, 0);
     return salesOfMonth;
   }
+  async processSalesData_Weeks(data) {}
 }
 
 module.exports = Sales;
