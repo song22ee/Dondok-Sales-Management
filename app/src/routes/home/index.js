@@ -33,6 +33,6 @@ router.post('/finder', ctrl.process.post.finder);
 router.post('/sales', sessionAuth.checkSession, ctrl.process.post.sales);
 
 //UPDATE
-router.put('/salestest', sessionAuth.checkSession, ctrl.process.put.sales);
+router.put('/sales', sessionAuth.checkSession, ctrl.process.put.sales);
 
 module.exports = router;

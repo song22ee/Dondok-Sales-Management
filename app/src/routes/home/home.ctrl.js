@@ -75,7 +75,13 @@ const process = {
         const salesOfMonth = await salesInfo.processSalesData_Month(
           response.data
         );
+        const salesOfWeek = await salesInfo.processSalesData_Weeks(
+          req.params.year,
+          req.params.month,
+          response.data
+        );
         response.total = salesOfMonth;
+        response.week = salesOfWeek;
       } else {
         if (response.err) logger.error(`${response.err}`);
       }
@@ -85,10 +91,12 @@ const process = {
       const salesInfo = new Sales(req, res);
       const response = await salesInfo.dayInfo();
       if (response.success) {
-        res.render('home/input', {
-          user: req.session.userName,
-          data: response.data,
-        });
+        if (response.data) {
+          res.render('home/input', {
+            user: req.session.userName,
+            data: response.data,
+          });
+        }
       } else {
         if (response.err) logger.error(`${response.err}`);
       }

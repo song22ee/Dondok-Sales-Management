@@ -17,11 +17,11 @@ class SalesStorage {
     });
   }
 
-  static GetSalesMonth(salesDay, userid) {
+  static GetSalesMonth(userid, year, month) {
     return new Promise((resolve, reject) => {
       const sql =
         'SELECT * FROM Sales WHERE userId = ? AND year = ? AND month = ?;';
-      con.query(sql, [userid, salesDay.year, salesDay.month], (err, rows) => {
+      con.query(sql, [userid, year, month], (err, rows) => {
         if (err) {
           reject(`${err}`);
         } else resolve(rows);
@@ -29,33 +29,23 @@ class SalesStorage {
     });
   }
 
-  static GetSalesDay(salesDay, userid) {
+  static GetSalesDay(userid, year, month, day) {
     return new Promise((resolve, reject) => {
       const sql =
         'SELECT * FROM Sales WHERE userId = ? AND year = ? AND month = ? AND days = ?;';
-      con.query(
-        sql,
-        [userid, salesDay.year, salesDay.month, salesDay.day],
-        (err, rows) => {
-          if (err) {
-            reject(`${err}`);
-          } else resolve(rows);
-        }
-      );
+      con.query(sql, [userid, year, month, day], (err, rows) => {
+        if (err) {
+          reject(`${err}`);
+        } else resolve(rows);
+      });
     });
   }
 
-  static SaveSalesInfo(salesInfo, userid) {
+  static SaveSalesInfo(userid, year, month, day, sales) {
     return new Promise((resolve, reject) => {
       const sql =
         'INSERT INTO Sales(year, month, days, sales, userId) VALUES (?,?,?,?,?);';
-      const salesinfo = [
-        salesInfo.sales_Years,
-        salesInfo.sales_Month,
-        salesInfo.sales_Days,
-        salesInfo.sales,
-        userid,
-      ];
+      const salesinfo = [year, month, day, sales, userid];
       con.query(sql, salesinfo, (err) => {
         if (err) {
           reject(err);
@@ -64,7 +54,7 @@ class SalesStorage {
     });
   }
 
-  static UpdateSalesInfo(salesInfo, userid) {
+  static UpdateSalesInfo(userid, salesInfo) {
     return new Promise((resolve, reject) => {
       const sql =
         'UPDATE Sales SET sales = ? WHERE userId = ? AND year = ? AND month = ? AND days = ?;';
@@ -75,7 +65,7 @@ class SalesStorage {
         salesInfo.month,
         salesInfo.days,
       ];
-      con.query(sql, salesinfo, (err, rows) => {
+      con.query(sql, salesinfo, (err) => {
         if (err) {
           reject(err);
         } else resolve({ success: true });

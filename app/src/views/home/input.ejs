@@ -16,9 +16,9 @@
   </head>
 
   <body>
-    <input id="year" type="hidden" value="<%= data[0].year %>" />
-    <input id="month" type="hidden" value="<%= data[0].month %>" />
-    <input id="days" type="hidden" value="<%= data[0].days %>" />
+    <input id="year" type="hidden" value="<%= data.year %>" />
+    <input id="month" type="hidden" value="<%= data.month %>" />
+    <input id="days" type="hidden" value="<%= data.days %>" />
     <section class="main">
       <div class="dondok">
         <div class="select-box">
@@ -33,8 +33,8 @@
         <div class="input-main">
           <div class="input-date">
             <span
-              ><%= data[0].year %>년 <%= data[0].month %>월 <%= data[0].days
-              %>일 매출전표</span
+              ><%= data.year %>년 <%= data.month %>월 <%= data.days %>일
+              매출전표</span
             >
           </div>
 
@@ -45,8 +45,8 @@
                 id="sales"
                 type="text"
                 class="input"
-                value="<%=data[0].sales %>"
-                placeholder="<%=data[0].sales %>"
+                value="<%=data.sales %>"
+                placeholder="<%=data.sales %>"
               />
             </div>
           </div>
@@ -55,6 +55,7 @@
         <div class="input-button">
           <button id="cancel">취소</button>
           <button id="update">수정</button>
+          <button id="insert">등록</button>
         </div>
       </div>
     </section>
