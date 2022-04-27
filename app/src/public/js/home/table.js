@@ -76,7 +76,14 @@ const renderCalendar = async () => {
       .map((item) => item.sales);
     //주간 매출액
     const dailyReturns__figure = [salesOfDay[0]];
-    const weeklyReturns__figure = salesOfWeek.findIndex((a) => a.week === date);
+    const weeklyReturns__figure = salesOfWeek
+      .filter((item) => {
+        if (item.week === date) {
+          return item;
+        }
+      })
+      .map((item) => item.sales);
+
     dates[
       i
     ] = `<a href="/table/${viewYear}/${viewMonth}/${date}" id=dayInfo class="date ${condition}" >
