@@ -99,15 +99,15 @@ class Sales {
         //일요일 or 마지막날
         salesOfWeeks.push({ week: dates, sales: result });
         result = 0;
-        return result;
-      } else if (salesOfDate[0]) {
+        // console.log(salesOfDate[0].sales);
+      }
+      if (salesOfDate[0]) {
         result = result + salesOfDate[0].sales;
         return result;
       } else {
         return result;
       }
     }, 0);
-    console.log(salesOfWeeks);
     return salesOfWeeks;
   }
 }

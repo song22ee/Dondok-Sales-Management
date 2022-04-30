@@ -39,7 +39,7 @@ class UserStorage {
         userInfo.psword,
         userInfo.emailAdress,
       ];
-      con.query(sql, userinfo, (err, rows) => {
+      con.query(sql, userinfo, (err) => {
         if (err) {
           reject(err);
         } else resolve({ success: true });
