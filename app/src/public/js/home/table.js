@@ -55,7 +55,6 @@ const renderCalendar = async () => {
   const dailyReturns__text = '일일 매출액 : ';
 
   //주간 매출액을 일요일만 뜨게 해야함.
-  const weeklyReturns__text = '주간 매출액 : ';
 
   //지난 날짜, 다음 날짜 흐리게
   const firstDateIndex = dates.indexOf(1); //5 (1일)
@@ -75,6 +74,7 @@ const renderCalendar = async () => {
       })
       .map((item) => item.sales);
     //주간 매출액
+    let weeklyReturns__text = '주간 매출액 : ';
     const dailyReturns__figure = [salesOfDay[0]];
     const weeklyReturns__figure = salesOfWeek
       .filter((item) => {
@@ -83,6 +83,12 @@ const renderCalendar = async () => {
         }
       })
       .map((item) => item.sales);
+    console.log(weeklyReturns__figure[0]);
+
+    if (weeklyReturns__figure[0] === undefined) {
+      weeklyReturns__text = '';
+    }
+    console.log(weeklyReturns__text);
 
     dates[
       i

@@ -68,11 +68,11 @@ class user {
   async finder() {
     const body = this.body;
     const response = {};
-    const { id, psword, email } = await Userstorage.GetUserInfo(body.id);
-    if (id) {
-      if (id === body.id && email === body.emailAdress) {
+    const user = await Userstorage.GetUserInfo(body.id);
+    if (user) {
+      if (user.userid === body.id && user.email === body.emailAdress) {
         response.success = true;
-        response.msg = `비밀번호는 ${psword}입니다.`;
+        response.msg = `비밀번호는 ${user.psword}입니다.`;
         return response;
       }
       response.success = false;

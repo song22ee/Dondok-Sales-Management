@@ -5,9 +5,9 @@
     "es2021": true
   },
   "extends": [
-            "eslint:recommended",
+    "eslint:recommended",
     "plugin:prettier/recommended"
-//    "google"
+    //    "google"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
