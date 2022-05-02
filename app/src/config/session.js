@@ -13,8 +13,9 @@ const sessionStore = new MySQLStore(mysqlConfig);
 const sessionModule = session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: sessionStore,
+  cookie: { maxAge: 1000000 },
 });
 
 module.exports = sessionModule;
