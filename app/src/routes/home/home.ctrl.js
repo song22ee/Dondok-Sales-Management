@@ -1,5 +1,6 @@
 'use strict';
 //Config
+const requestIp = require('request-ip');
 const logger = require('../../config/logger');
 // const jwt = require('../../config/jwt');
 
@@ -9,6 +10,7 @@ const Sales = require('../../models/sales');
 
 const output = {
   home: (req, res) => {
+    logger.info(`${requestIp.getClientIp(req)}`);
     res.render('home/index');
   },
 
@@ -110,6 +112,10 @@ const process = {
       if (response.err) logger.error(`${response.err}`);
       return res.json(response);
     },
+  },
+  test: async (req, res) => {
+    logger.info(`${requestIp.getClientIp(req)}`);
+    return res.json('error');
   },
 };
 

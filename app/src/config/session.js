@@ -15,7 +15,11 @@ const sessionModule = session({
   resave: false,
   saveUninitialized: false,
   store: sessionStore,
-  cookie: { maxAge: 1000000 },
+  cookie: {
+    httpOnly: true,
+    // secure: true,
+    maxAge: 1000000,
+  },
 });
 
 module.exports = sessionModule;
