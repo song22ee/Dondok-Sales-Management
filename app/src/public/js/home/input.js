@@ -65,3 +65,21 @@ function Insert() {
 function Cancel() {
   location.href = '/table';
 }
+
+//login 버튼 뜨게하고 나머지 뿌옇게 하기
+
+function arrowClick() {
+  const arrowDown = document.querySelector('.arrow-down');
+  const logout = document.getElementById('logout');
+
+  arrowDown.classList.toggle('arrow_click');
+
+  if (arrowDown.classList.contains('arrow_click')) {
+    console.log('arrowClick() 실행3');
+    document.querySelector('.calendar').style.opacity = '0.5';
+    logout.style.display = 'block';
+  } else {
+    document.querySelector('.calendar').style.opacity = '1';
+    logout.style.display = 'none';
+  }
+}
