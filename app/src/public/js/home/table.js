@@ -54,6 +54,8 @@ const renderCalendar = async () => {
 
   const dailyReturns__text = '일일 매출액 : ';
 
+  const test = [];
+
   //주간 매출액을 일요일만 뜨게 해야함.
 
   //지난 날짜, 다음 날짜 흐리게
@@ -74,21 +76,19 @@ const renderCalendar = async () => {
       })
       .map((item) => item.sales);
     //주간 매출액
-    let weeklyReturns__text = '주간 매출액 : ';
+    // let weeklyReturns__text = '주간 매출액 : ';
     const dailyReturns__figure = [salesOfDay[0]];
-    const weeklyReturns__figure = salesOfWeek
-      .filter((item) => {
-        if (item.week === date) {
-          return item;
-        }
-      })
-      .map((item) => item.sales);
-    console.log(weeklyReturns__figure[0]);
+    // const weeklyReturns__figure = salesOfWeek
+    //   .filter((item) => {
+    //     if (item.week === date) {
+    //       return item;
+    //     }
+    //   })
+    //   .map((item) => item.sales);
 
-    if (weeklyReturns__figure[0] === undefined) {
-      weeklyReturns__text = '';
-    }
-    console.log(weeklyReturns__text);
+    // if (weeklyReturns__figure[0] === undefined) {
+    //   weeklyReturns__text = '';
+    // }
 
     dates[
       i
@@ -101,12 +101,20 @@ const renderCalendar = async () => {
     </a>`;
   });
 
-  /* <div class="weekly-returns returns">
-          <span class="weekly-returns__title ${condition}">${weeklyReturns__text}</span>
-          <span class="weekly-returns__figure ${condition}">${weeklyReturns__figure}</span>
-      </div> */
-
+  ////////////주간매출
+  salesOfWeek.map((x, idx) => {
+    test[idx] = `
+    <div class="total-content">
+      <span>${idx + 1}</span>
+         <div class="weekly-returns returns">
+            <span class="weekly-returns__title">주간매출액 : </span>
+            <span class="weekly-returns__figure">${x.sales}</span>
+          </div>
+    </div>
+    `;
+  });
   document.querySelector('.dates').innerHTML = dates.join('');
+  document.querySelector('.weekDates').innerHTML = test.join('');
 
   // 오늘 날짜 그리기
   const today = new Date();

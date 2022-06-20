@@ -97,7 +97,7 @@ class Sales {
       const salesOfDate = data.filter((sales) => sales.days === dates);
       if (salesInit === 0 || dates === TLDate) {
         //일요일 or 마지막날
-        salesOfWeeks.push({ week: dates, sales: result });
+        if (dates !== 1) salesOfWeeks.push({ week: dates, sales: result });
         result = 0;
         // console.log(salesOfDate[0].sales);
       }

@@ -1,128 +1,73 @@
 <!DOCTYPE html>
 <html lang="kor">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/home/style.css" />
+    <script
+      src="https://kit.fontawesome.com/73fbcb87e6.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/home/calendar.js" defer></script>
+    <script src="/js/home/table.js" defer></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/css/home/style.css" />
-  <script src="https://kit.fontawesome.com/73fbcb87e6.js" crossorigin="anonymous"></script>
-  <script src="/js/home/calendar.js" defer></script>
-  <script src="/js/home/table.js" defer></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <title>Document</title>
-</head>
-
-<body>
-  <section class="main">
-    <div class="dondok">
-      <div class="select-box">
-        <span class="id-name">
-          <%= user %>
-        </span>
-        <!--<i class="fas fa-angle-down fa-2x"></i>-->
-        <div class="arrow-down" onclick="arrowClick()"></div>
+  <body>
+    <section class="main">
+      <div class="dondok">
+        <div class="select-box">
+          <span class="id-name"> <%= user %> </span>
+          <!--<i class="fas fa-angle-down fa-2x"></i>-->
+          <div class="arrow-down" onclick="arrowClick()"></div>
+        </div>
+        <div id="logout">
+          <a href="/logout"><span>logout</span></a>
+        </div>
       </div>
-      <div id="logout">
-        <a href="/logout"><span>logout</span></a>
-      </div>
-    </div>
 
-    <div class="calendar">
-      <div class="calendar-header">
-        <div class="nav">
-          <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
-          <div class="year-month" onclick="goToday()"></div>
-          <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+      <div class="calendar">
+        <div class="calendar-header">
+          <div class="nav">
+            <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
+            <div class="year-month" onclick="goToday()"></div>
+            <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+          </div>
+
+          <div class="calendar-header__monthly-returns returns">
+            <div class="monthly-returns">
+              <span class="monthly-returns__title">월간 매출액 : </span>
+              <span id="salesOfMonth" class="monthly-returns__figure"></span>
+            </div>
+          </div>
         </div>
 
-        <div class="calendar-header__monthly-returns returns">
-          <div class="monthly-returns">
-            <span class="monthly-returns__title">월간 매출액 : </span>
-            <span id="salesOfMonth" class="monthly-returns__figure"></span>
+        <div class="calendar-main">
+          <div class="dates-section">
+            <div class="weeks">
+              <div class="sun"><span>일</span></div>
+              <div class="mon"><span>월</span></div>
+              <div class="tue"><span>화</span></div>
+              <div class="wed"><span>수</span></div>
+              <div class="thu"><span>목</span></div>
+              <div class="fri"><span>금</span></div>
+              <div class="sat"><span>토</span></div>
+            </div>
+
+            <div class="dates"></div>
+          </div>
+
+          <div class="total-section">
+            <div class="total-title"><span>계</span></div>
+
+            <div class="weekDates">
+              <div class="total-contents"></div>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="calendar-main">
-
-        <div class="dates-section">
-
-          <div class="weeks">
-            <div class="sun"><span>일</span></div>
-            <div class="mon"><span>월</span></div>
-            <div class="tue"><span>화</span></div>
-            <div class="wed"><span>수</span></div>
-            <div class="thu"><span>목</span></div>
-            <div class="fri"><span>금</span></div>
-            <div class="sat"><span>토</span></div>
-          </div>
-
-          <div class="dates"></div>
-
-        </div>
-
-        <div class="total-section">
-
-          <div class="total-title"><span>계</span></div>
-          <div class="total-contents">
-            <div class="total-content">
-              <span>5/29~6/4</span>
-              <div class="weekly-returns returns">
-                <span class="weekly-returns__title">주간매출액 : </span>
-                <span class="weekly-returns__figure"></span>
-              </div>
-
-            </div>
-            <div class="total-content">
-              <span>5/29~6/4</span>
-              <div class="weekly-returns returns">
-                <span class="weekly-returns__title">주간매출액 : </span>
-                <span class="weekly-returns__figure"></span>
-              </div>
-
-            </div>
-            <div class="total-content">
-              <span>5/29~6/4</span>
-              <div class="weekly-returns returns">
-                <span class="weekly-returns__title">주간매출액 : </span>
-                <span class="weekly-returns__figure"></span>
-              </div>
-
-            </div>
-            <div class="total-content">
-              <span>5/29~6/4</span>
-              <div class="weekly-returns returns">
-                <span class="weekly-returns__title">주간매출액 : </span>
-                <span class="weekly-returns__figure"></span>
-              </div>
-
-            </div>
-            <div class="total-content">
-              <span>5/29~6/4</span>
-              <div class="weekly-returns returns">
-                <span class="weekly-returns__title">주간매출액 : </span>
-                <span class="weekly-returns__figure"></span>
-              </div>
-
-            </div>
-            <div class="total-content">
-              <span>5/29~6/4</span>
-              <div class="weekly-returns returns">
-                <span class="weekly-returns__title">주간매출액 : </span>
-                <span class="weekly-returns__figure"></span>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-
-    </div>
-  </section>
-</body>
-
+    </section>
+  </body>
 </html>
