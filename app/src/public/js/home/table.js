@@ -98,12 +98,13 @@ const renderCalendar = async () => {
           <span class="daily-returns__title ${condition}">${dailyReturns__text}</span>
           <span id="salesOfDaily" class="daily-returns__figure ${condition}">${dailyReturns__figure}</span>
       </div>
-      <div class="weekly-returns returns">
-          <span class="weekly-returns__title ${condition}">${weeklyReturns__text}</span>
-          <span class="weekly-returns__figure ${condition}">${weeklyReturns__figure}</span>
-      </div>
     </a>`;
   });
+
+  /* <div class="weekly-returns returns">
+          <span class="weekly-returns__title ${condition}">${weeklyReturns__text}</span>
+          <span class="weekly-returns__figure ${condition}">${weeklyReturns__figure}</span>
+      </div> */
 
   document.querySelector('.dates').innerHTML = dates.join('');
 
@@ -157,17 +158,17 @@ function SalesData(year, month) {
 }
 
 //login 버튼 뜨게하고 나머지 뿌옇게 하기
-const arrowDown = document.getElementsByClassName('arrow-down')[0];
-const logout = document.getElementById('logout');
-
 function arrowClick() {
+  const arrowDown = document.querySelector('.arrow-down');
+  const logout = document.getElementById('logout');
+
   arrowDown.classList.toggle('arrow_click');
 
   if (arrowDown.classList.contains('arrow_click')) {
-    document.getElementsByClassName('calendar')[0].style.opacity = '0.5';
+    document.querySelector('.calendar').style.opacity = '0.5';
     logout.style.display = 'block';
   } else {
-    document.getElementsByClassName('calendar')[0].style.opacity = '1';
+    document.querySelector('.calendar').style.opacity = '1';
     logout.style.display = 'none';
   }
 }
