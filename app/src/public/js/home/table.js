@@ -101,6 +101,14 @@ const renderCalendar = async () => {
     </a>`;
   });
 
+  console.log(dates.length);
+  if (dates.length > 35) {
+    console.log('넘친다');
+    document.querySelector('.main').style.height = '680px';
+  } else {
+    document.querySelector('.main').style.height = '600px';
+  }
+
   ////////////주간매출
   salesOfWeek.map((x, idx) => {
     test[idx] = `
