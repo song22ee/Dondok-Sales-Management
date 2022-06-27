@@ -41,11 +41,31 @@ class SpendingStorage {
     });
   }
 
-  static SaveSpendingInfo(userid, year, month, day, sales) {
+  static SaveSpendingInfo(
+    userid,
+    year,
+    month,
+    day,
+    meat,
+    foodIngredients,
+    alcohol,
+    beverage,
+    etc
+  ) {
     return new Promise((resolve, reject) => {
       const sql =
         'INSERT INTO Spending(year, month, days, meat, foodIngredients, alcohol, beverage, etc, userId) VALUES (?,?,?,?,?);';
-      const salesinfo = [year, month, day, sales, userid];
+      const salesinfo = [
+        year,
+        month,
+        day,
+        meat,
+        foodIngredients,
+        alcohol,
+        beverage,
+        etc,
+        userid,
+      ];
       con.query(sql, salesinfo, (err) => {
         if (err) {
           reject(err);

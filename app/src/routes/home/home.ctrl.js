@@ -7,6 +7,7 @@ const logger = require('../../config/logger');
 //Models
 const User = require('../../models/user');
 const Sales = require('../../models/sales');
+const Spending = require('../../models/spending');
 
 const output = {
   home: (req, res) => {
@@ -63,6 +64,7 @@ const process = {
 
     sales: async (req, res) => {
       //생각중인 것 table schema month, days, sales, userId(one to many)
+      console.log(req.body);
       const salesInfo = new Sales(req, res);
       const response = await salesInfo.inputSales();
       return res.json(response);
@@ -126,6 +128,14 @@ const auth = {
       res.redirect('/login');
     });
   },
+};
+
+const test = {
+  post: async (req, res) => {
+    const spendingInfo = new Spending(req, res);
+    const response = await spendingInfo.inputSpending();
+  },
+  get: (req, res) => {},
 };
 
 module.exports = {
