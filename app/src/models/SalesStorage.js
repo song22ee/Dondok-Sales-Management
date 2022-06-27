@@ -41,11 +41,35 @@ class SalesStorage {
     });
   }
 
-  static SaveSalesInfo(userid, year, month, day, sales) {
+  static SaveSalesInfo(
+    userid,
+    year,
+    month,
+    day,
+    sales,
+    meat,
+    foodIngredients,
+    alcohol,
+    beverage,
+    expense,
+    etc
+  ) {
     return new Promise((resolve, reject) => {
       const sql =
-        'INSERT INTO Sales(year, month, days, sales, userId) VALUES (?,?,?,?,?);';
-      const salesinfo = [year, month, day, sales, userid];
+        'INSERT INTO Sales(year, month, days, sales, meat, foodIngredients, alcohol, beverage, expense, etc, userId) VALUES (?,?,?,?,?,?,?,?,?,?,?);';
+      const salesinfo = [
+        year,
+        month,
+        day,
+        sales,
+        meat,
+        foodIngredients,
+        alcohol,
+        beverage,
+        expense,
+        etc,
+        userid,
+      ];
       con.query(sql, salesinfo, (err) => {
         if (err) {
           reject(err);
@@ -54,16 +78,34 @@ class SalesStorage {
     });
   }
 
-  static UpdateSalesInfo(userid, salesInfo) {
+  static UpdateSalesInfo(
+    userid,
+    year,
+    month,
+    day,
+    sales,
+    meat,
+    foodIngredients,
+    alcohol,
+    beverage,
+    expense,
+    etc
+  ) {
     return new Promise((resolve, reject) => {
       const sql =
-        'UPDATE Sales SET sales = ? WHERE userId = ? AND year = ? AND month = ? AND days = ?;';
+        'UPDATE Sales SET sales = ?, meat = ?, foodIngredients = ?, alcohol = ?, beverage = ?, expense = ?, etc = ? WHERE userId = ? AND year = ? AND month = ? AND days = ?;';
       const salesinfo = [
-        salesInfo.sales,
+        sales,
+        meat,
+        foodIngredients,
+        alcohol,
+        beverage,
+        expense,
+        etc,
         userid,
-        salesInfo.year,
-        salesInfo.month,
-        salesInfo.days,
+        year,
+        month,
+        day,
       ];
       con.query(sql, salesinfo, (err) => {
         if (err) {

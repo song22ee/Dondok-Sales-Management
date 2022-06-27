@@ -16,7 +16,26 @@ class Sales {
         req.params.year,
         req.params.month
       );
-      return { success: true, data: monthInfo };
+      const monthProfit = monthInfo.map((data) => {
+        const profit =
+          data.sales -
+          data.meat -
+          data.foodIngredients -
+          data.alcohol -
+          data.beverage -
+          data.expense -
+          data.etc;
+        return {
+          sales_id: data.sales_id,
+          year: data.year,
+          month: data.month,
+          days: data.days,
+          sales: profit,
+          userid: data.userid,
+        };
+      });
+      console.log(monthProfit);
+      return { success: true, data: monthProfit };
     } catch (err) {
       return { success: false, msg: '오류', err };
     }
@@ -40,6 +59,12 @@ class Sales {
           month: req.params.month,
           days: req.params.day,
           sales: 0,
+          meat: 0,
+          foodIngredients: 0,
+          alcohol: 0,
+          beverage: 0,
+          expense: 0,
+          etc: 0,
         };
         return { success: true, data: dummyData };
       }
@@ -51,14 +76,19 @@ class Sales {
   async inputSales() {
     const req = this.req;
     const session = req.session;
-    console.log(req.body);
     try {
       await SalesStorage.SaveSalesInfo(
         session.userId,
         req.body.year,
         req.body.month,
         req.body.days,
-        req.body.sales
+        req.body.sales,
+        req.body.meat,
+        req.body.foodIngredients,
+        req.body.alcohol,
+        req.body.beverage,
+        req.body.expense,
+        req.body.etc
       );
       return { success: true, msg: '입력완료.' };
     } catch (err) {
@@ -70,7 +100,19 @@ class Sales {
     const req = this.req;
     const session = req.session;
     try {
-      await SalesStorage.UpdateSalesInfo(session.userId, req.body);
+      await SalesStorage.UpdateSalesInfo(
+        session.userId,
+        req.body.year,
+        req.body.month,
+        req.body.days,
+        req.body.sales,
+        req.body.meat,
+        req.body.foodIngredients,
+        req.body.alcohol,
+        req.body.beverage,
+        req.body.expense,
+        req.body.etc
+      );
       return { success: true, msg: '수정완료.' };
     } catch (err) {
       return { success: false, msg: '입력 오류', err };
@@ -82,6 +124,7 @@ class Sales {
       result = result + info.sales;
       return result;
     }, 0);
+    console.log(salesOfMonth);
     return salesOfMonth;
   }
 

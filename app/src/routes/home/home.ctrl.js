@@ -64,7 +64,6 @@ const process = {
 
     sales: async (req, res) => {
       //생각중인 것 table schema month, days, sales, userId(one to many)
-      console.log(req.body);
       const salesInfo = new Sales(req, res);
       const response = await salesInfo.inputSales();
       return res.json(response);

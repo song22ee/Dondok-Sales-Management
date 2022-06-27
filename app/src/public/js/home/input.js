@@ -1,9 +1,18 @@
 'use strict';
 
+//Data
 const yearInfo = document.querySelector('#year');
 const monthInfo = document.querySelector('#month');
 const daysInfo = document.querySelector('#days');
 const salesInfo = document.querySelector('#sales');
+const meatInfo = document.querySelector('#meat');
+const foodIngredientsInfo = document.querySelector('#foodIngredients');
+const alcoholInfo = document.querySelector('#alcohol');
+const beverageInfo = document.querySelector('#beverage');
+const expenseInfo = document.querySelector('#expense');
+const etcInfo = document.querySelector('#etc');
+
+//Button
 const cancelBtn = document.querySelector('#cancel');
 const updateBtn = document.querySelector('#update');
 const insertBtn = document.querySelector('#insert');
@@ -18,6 +27,12 @@ function Update() {
     month: monthInfo.value,
     days: daysInfo.value,
     sales: salesInfo.value,
+    meat: meatInfo.value,
+    foodIngredients: foodIngredientsInfo.value,
+    alcohol: alcoholInfo.value,
+    beverage: beverageInfo.value,
+    expense: expenseInfo.value,
+    etc: etcInfo.value,
   };
   fetch('/sales', {
     method: 'PUT',
@@ -43,6 +58,12 @@ function Insert() {
     month: monthInfo.value,
     days: daysInfo.value,
     sales: salesInfo.value,
+    meat: meatInfo.value,
+    foodIngredients: foodIngredientsInfo.value,
+    alcohol: alcoholInfo.value,
+    beverage: beverageInfo.value,
+    expense: expenseInfo.value,
+    etc: etcInfo.value,
   };
   fetch('/sales', {
     method: 'POST',
