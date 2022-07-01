@@ -3,14 +3,11 @@
 //Data
 const yearInfo = document.querySelector('#year');
 const monthInfo = document.querySelector('#month');
-const daysInfo = document.querySelector('#days');
-const salesInfo = document.querySelector('#sales');
-const meatInfo = document.querySelector('#meat');
-const foodIngredientsInfo = document.querySelector('#foodIngredients');
-const alcoholInfo = document.querySelector('#alcohol');
-const beverageInfo = document.querySelector('#beverage');
+const rentInfo = document.querySelector('#rent');
+const admincostInfo = document.querySelector('#admincost');
+const insuranceInfo = document.querySelector('#insurance');
+const insurance4Info = document.querySelector('#insurance4');
 const expenseInfo = document.querySelector('#expense');
-const etcInfo = document.querySelector('#etc');
 
 //Button
 const cancelBtn = document.querySelector('#cancel');
@@ -25,16 +22,13 @@ function Update() {
   const req = {
     year: yearInfo.value,
     month: monthInfo.value,
-    days: daysInfo.value,
-    sales: salesInfo.value,
-    meat: meatInfo.value,
-    foodIngredients: foodIngredientsInfo.value,
-    alcohol: alcoholInfo.value,
-    beverage: beverageInfo.value,
+    rent: rentInfo.value,
+    admincost: admincostInfo.value,
+    insurance: insuranceInfo.value,
+    insurance4: insurance4Info.value,
     expense: expenseInfo.value,
-    etc: etcInfo.value,
   };
-  fetch('/sales', {
+  fetch('/spending', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(req),
@@ -56,16 +50,13 @@ function Insert() {
   const req = {
     year: yearInfo.value,
     month: monthInfo.value,
-    days: daysInfo.value,
-    sales: salesInfo.value,
-    meat: meatInfo.value,
-    foodIngredients: foodIngredientsInfo.value,
-    alcohol: alcoholInfo.value,
-    beverage: beverageInfo.value,
+    rent: rentInfo.value,
+    admincost: admincostInfo.value,
+    insurance: insuranceInfo.value,
+    insurance4: insurance4Info.value,
     expense: expenseInfo.value,
-    etc: etcInfo.value,
   };
-  fetch('/sales', {
+  fetch('/spending', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(req),

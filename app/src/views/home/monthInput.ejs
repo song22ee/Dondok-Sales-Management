@@ -10,18 +10,17 @@
       src="https://kit.fontawesome.com/73fbcb87e6.js"
       crossorigin="anonymous"
     ></script>
-    <script src="/js/home/input.js" defer></script>
+    <script src="/js/home/monthInput.js" defer></script>
     <title>Document</title>
   </head>
 
   <body>
     <input id="year" type="hidden" value="<%= data.year %>" />
     <input id="month" type="hidden" value="<%= data.month %>" />
-    <input id="days" type="hidden" value="<%= data.days %>" />
     <section class="main">
       <div class="dondok">
         <div class="select-box">
-          <span class="id-name"> <%= user %> </span>
+          <span class="id-name"> <%= user %></span>
           <!--<i class="fas fa-angle-down fa-2x"></i>-->
           <div class="arrow-down" onclick="arrowClick()"></div>
         </div>
@@ -33,10 +32,7 @@
       <div class="calendar input-screen">
         <div class="input-main">
           <div class="input-date">
-            <span
-              ><%= data.year %>년 <%= data.month %>월 <%= data.days %>일
-              매출전표</span
-            >
+            <span><%= data.year %>년 <%= data.month %>월 매출전표</span>
           </div>
 
           <div class="input-section">
@@ -47,53 +43,53 @@
                   id="sales"
                   type="text"
                   class="input"
-                  value="<%=data.sales %>"
-                  placeholder="<%=data.sales %>"
+                  value="0"
+                  placeholder="0"
                 />
               </div>
             </div>
 
             <div class="expenditure">
-              <span>지출</span>
+              <span>월 지출</span>
               <div class="expenditure_input-section">
                 <div class="input-box">
-                  <span>육류 :</span>
+                  <span>임대료 :</span>
                   <input
-                    id="meat"
+                    id="rent"
                     type="text"
                     class="input"
-                    value="<%=data.meat %>"
-                    placeholder="<%=data.meat %>"
+                    value="<%= data.rent %>"
+                    placeholder="<%= data.rent %>"
                   />
                 </div>
                 <div class="input-box">
-                  <span>식자재 :</span>
+                  <span>관리비 :</span>
                   <input
-                    id="foodIngredients"
+                    id="admincost"
                     type="text"
                     class="input"
-                    value="<%=data.foodIngredients %>"
-                    placeholder="<%=data.foodIngredients %>"
+                    value="<%= data.admincost %>"
+                    placeholder="<%= data.admincost %>"
                   />
                 </div>
                 <div class="input-box">
-                  <span>주류 :</span>
+                  <span>보험금 :</span>
                   <input
-                    id="alcohol"
+                    id="insurance"
                     type="text"
                     class="input"
-                    value="<%=data.alcohol %>"
-                    placeholder="<%=data.alcohol %>"
+                    value="<%= data.insurance %>"
+                    placeholder="<%= data.insurance %>"
                   />
                 </div>
                 <div class="input-box">
-                  <span>음료 :</span>
+                  <span>4대 보험 :</span>
                   <input
-                    id="beverage"
+                    id="insurance4"
                     type="text"
                     class="input"
-                    value="<%=data.beverage %>"
-                    placeholder="<%=data.beverage %>"
+                    value="<%= data.insurance4 %>"
+                    placeholder="<%= data.insurance4 %>"
                   />
                 </div>
                 <div class="input-box">
@@ -102,18 +98,8 @@
                     id="expense"
                     type="text"
                     class="input"
-                    value="<%=data.expense %>"
-                    placeholder="<%=data.expense %>"
-                  />
-                </div>
-                <div class="input-box">
-                  <span>기타 :</span>
-                  <input
-                    id="etc"
-                    type="text"
-                    class="input"
-                    value="<%=data.etc %>"
-                    placeholder="<%=data.etc %>"
+                    value="<%= data.expense %>"
+                    placeholder="<%= data.expense %>"
                   />
                 </div>
               </div>

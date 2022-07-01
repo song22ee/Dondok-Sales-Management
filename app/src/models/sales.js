@@ -34,7 +34,6 @@ class Sales {
           userid: data.userid,
         };
       });
-      console.log(monthProfit);
       return { success: true, data: monthProfit };
     } catch (err) {
       return { success: false, msg: '오류', err };

@@ -68,6 +68,12 @@ const process = {
       const response = await salesInfo.inputSales();
       return res.json(response);
     },
+
+    spending: async (req, res) => {
+      const spendingInfo = new Spending(req, res);
+      const response = await spendingInfo.inputSpend();
+      return res.json(response);
+    },
   },
 
   get: {
@@ -104,12 +110,32 @@ const process = {
         if (response.err) logger.error(`${response.err}`);
       }
     },
+    spendingInfo: async (req, res) => {
+      const spendingInfo = new Spending(req, res);
+      const response = await spendingInfo.monthInfo();
+      if (response.success) {
+        if (response.data) {
+          res.render('home/monthInput', {
+            user: req.session.userName,
+            data: response.data,
+          });
+        }
+      } else {
+        if (response.err) logger.error(`${response.err}`);
+      }
+    },
   },
 
   put: {
     sales: async (req, res) => {
       const salesInfo = new Sales(req, res);
       const response = await salesInfo.updateSales();
+      if (response.err) logger.error(`${response.err}`);
+      return res.json(response);
+    },
+    spending: async (req, res) => {
+      const spendingInfo = new Spending(req, res);
+      const response = await spendingInfo.updateSpend();
       if (response.err) logger.error(`${response.err}`);
       return res.json(response);
     },
@@ -127,14 +153,6 @@ const auth = {
       res.redirect('/login');
     });
   },
-};
-
-const test = {
-  post: async (req, res) => {
-    const spendingInfo = new Spending(req, res);
-    const response = await spendingInfo.inputSpending();
-  },
-  get: (req, res) => {},
 };
 
 module.exports = {

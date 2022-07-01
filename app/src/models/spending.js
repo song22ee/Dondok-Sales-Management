@@ -9,41 +9,24 @@ class Spending {
 
   async monthInfo() {
     const req = this.req;
-    const session = this.req.session;
+    const session = req.session;
     try {
-      const monthInfo = await SpendingStorage.GetSpendingMonth(
+      const monthInfo = await SpendingStorage.GetSpending(
         session.userId,
         req.params.year,
         req.params.month
       );
-      return { success: true, data: monthInfo };
-    } catch (err) {
-      return { success: false, msg: '오류', err };
-    }
-  }
-
-  async dayInfo() {
-    const req = this.req;
-    const session = req.session;
-    try {
-      const dayInfo = await SpendingStorage.GetSpendingDay(
-        session.userId,
-        req.params.year,
-        req.params.month,
-        req.params.day
-      );
-      if (dayInfo[0]) return { success: true, data: dayInfo[0] };
+      if (monthInfo[0]) return { success: true, data: monthInfo[0] };
       else {
         const dummyData = {
           id: 0,
           year: req.params.year,
           month: req.params.month,
-          days: req.params.day,
-          meat: 0,
-          foodIngredients: 0,
-          alcohol: 0,
-          beverage: 0,
-          etc: 0,
+          rent: 0,
+          admincost: 0,
+          insurance: 0,
+          insurance4: 0,
+          expense: 0,
         };
         return { success: true, data: dummyData };
       }
@@ -52,37 +35,45 @@ class Spending {
     }
   }
 
-  async inputSales() {
+  async inputSpend() {
     const req = this.req;
     const session = req.session;
-    console.log(req.body);
     try {
       await SpendingStorage.SaveSpendingInfo(
         session.userId,
         req.body.year,
         req.body.month,
-        req.body.days,
-        req.body.meat,
-        req.body.foodIngredients,
-        req.body.alcohol,
-        req.body.beverage,
-        req.body.etc
+        req.body.rent,
+        req.body.admincost,
+        req.body.insurance,
+        req.body.insurance4,
+        req.body.expense
       );
       return { success: true, msg: '입력완료.' };
     } catch (err) {
+      console.log(err);
       return { success: false, msg: '입력 오류', err };
     }
   }
 
-  // async updateSales() {
-  //   const req = this.req;
-  //   const session = req.session;
-  //   try {
-  //     await SpendingStorage.UpdateSalesInfo(session.userId, req.body);
-  //     return { success: true, msg: '수정완료.' };
-  //   } catch (err) {
-  //     return { success: false, msg: '입력 오류', err };
-  //   }
-  // }
+  async updateSpend() {
+    const req = this.req;
+    const session = req.session;
+    try {
+      await SpendingStorage.UpdateSpendingInfo(
+        session.userId,
+        req.body.year,
+        req.body.month,
+        req.body.rent,
+        req.body.admincost,
+        req.body.insurance,
+        req.body.insurance4,
+        req.body.expense
+      );
+      return { success: true, msg: '수정완료.' };
+    } catch (err) {
+      return { success: false, msg: '입력 오류', err };
+    }
+  }
 }
 module.exports = Spending;

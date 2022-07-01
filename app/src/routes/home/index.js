@@ -2,7 +2,6 @@
 
 const express = require('express');
 const router = express.Router();
-// const auth = require('../middlewares/auth');
 const sessionAuth = require('../middlewares/sessionauth');
 
 //Controller
@@ -26,13 +25,20 @@ router.get(
   ctrl.process.get.dayInfo
 );
 
+router.get(
+  '/spending/:year/:month',
+  sessionAuth.checkSession,
+  ctrl.process.get.spendingInfo
+);
 //POST
 router.post('/login', ctrl.process.post.login);
 router.post('/register', ctrl.process.post.register);
 router.post('/finder', ctrl.process.post.finder);
 router.post('/sales', sessionAuth.checkSession, ctrl.process.post.sales);
+router.post('/spending', sessionAuth.checkSession, ctrl.process.post.spending);
 
 //UPDATE
+router.put('/spending', sessionAuth.checkSession, ctrl.process.put.spending);
 router.put('/sales', sessionAuth.checkSession, ctrl.process.put.sales);
 
 //test

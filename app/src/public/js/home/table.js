@@ -13,7 +13,10 @@ const renderCalendar = async () => {
     viewYear + '년 ' + viewMonth + '월';
 
   const response = await SalesData(viewYear, viewMonth);
-  outputMonth.innerHTML = response.total;
+  outputMonth.innerHTML = `<a id="salesOfMonth" href="/spending/${viewYear}/${viewMonth}">
+                <span class="monthly-returns__title">월간 매출액 : </span>
+                <span class="monthly-returns__figure">${response.total}</span>
+              </a>`;
   const salesOfWeek = response.week;
 
   //지난달의 마지막 날의 Date 객체
@@ -56,8 +59,6 @@ const renderCalendar = async () => {
 
   const test = [];
 
-  //주간 매출액을 일요일만 뜨게 해야함.
-
   //지난 날짜, 다음 날짜 흐리게
   const firstDateIndex = dates.indexOf(1); //5 (1일)
   const lastDateIndex = dates.lastIndexOf(TLDate); //34 (30일)
@@ -88,9 +89,7 @@ const renderCalendar = async () => {
     </a>`;
   });
 
-  console.log(dates.length);
   if (dates.length > 35) {
-    console.log('넘친다');
     document.querySelector('.main').style.height = '680px';
   } else {
     document.querySelector('.main').style.height = '600px';

@@ -6,18 +6,18 @@ const config = mysqlConnection.config();
 const con = mysqlConnection.init(config);
 
 class SpendingStorage {
-  static GetSpending(userid) {
-    return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM Spending WHERE userId = ?;';
-      con.query(sql, [userid], (err, rows) => {
-        if (err) {
-          reject(err);
-        } else resolve(rows);
-      });
-    });
-  }
+  // static GetSpending(userid) {
+  //   return new Promise((resolve, reject) => {
+  //     const sql = 'SELECT * FROM Spending WHERE userId = ?;';
+  //     con.query(sql, [userid], (err, rows) => {
+  //       if (err) {
+  //         reject(err);
+  //       } else resolve(rows);
+  //     });
+  //   });
+  // }
 
-  static GetSpendingMonth(userid, year, month) {
+  static GetSpending(userid, year, month) {
     return new Promise((resolve, reject) => {
       const sql =
         'SELECT * FROM Spending WHERE userId = ? AND year = ? AND month = ?;';
@@ -29,41 +29,27 @@ class SpendingStorage {
     });
   }
 
-  static GetSpendingDay(userid, year, month, day) {
-    return new Promise((resolve, reject) => {
-      const sql =
-        'SELECT * FROM Spending WHERE userId = ? AND year = ? AND month = ? AND days = ?;';
-      con.query(sql, [userid, year, month, day], (err, rows) => {
-        if (err) {
-          reject(`${err}`);
-        } else resolve(rows);
-      });
-    });
-  }
-
   static SaveSpendingInfo(
     userid,
     year,
     month,
-    day,
-    meat,
-    foodIngredients,
-    alcohol,
-    beverage,
-    etc
+    rent,
+    admincost,
+    insurance,
+    insurance4,
+    expense
   ) {
     return new Promise((resolve, reject) => {
       const sql =
-        'INSERT INTO Spending(year, month, days, meat, foodIngredients, alcohol, beverage, etc, userId) VALUES (?,?,?,?,?);';
+        'INSERT INTO Spending(year, month, rent, admincost, insurance, insurance4, expense, userId) VALUES (?,?,?,?,?,?,?,?);';
       const salesinfo = [
         year,
         month,
-        day,
-        meat,
-        foodIngredients,
-        alcohol,
-        beverage,
-        etc,
+        rent,
+        admincost,
+        insurance,
+        insurance4,
+        expense,
         userid,
       ];
       con.query(sql, salesinfo, (err) => {
@@ -75,17 +61,39 @@ class SpendingStorage {
   }
 
   //수정부분
-  static UpdateSpendingInfo(userid, salesInfo) {
+  static UpdateSpendingInfo(
+    userid,
+    year,
+    month,
+    rent,
+    admincost,
+    insurance,
+    insurance4,
+    expense
+  ) {
     return new Promise((resolve, reject) => {
       const sql =
-        'UPDATE Spending SET sales = ? WHERE userId = ? AND year = ? AND month = ? AND days = ?;';
+        'UPDATE Spending SET rent = ?, admincost = ?, insurance = ?, insurance4 = ?, expense = ? WHERE userId = ? AND year = ? AND month = ?;';
       const salesinfo = [
-        salesInfo.sales,
+        rent,
+        admincost,
+        insurance,
+        insurance4,
+        expense,
         userid,
-        salesInfo.year,
-        salesInfo.month,
-        salesInfo.days,
+        year,
+        month,
       ];
+      console.log(
+        userid,
+        year,
+        month,
+        rent,
+        admincost,
+        insurance,
+        insurance4,
+        expense
+      );
       con.query(sql, salesinfo, (err) => {
         if (err) {
           reject(err);
