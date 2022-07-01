@@ -79,10 +79,13 @@ const process = {
   get: {
     monthInfo: async (req, res) => {
       const salesInfo = new Sales(req, res);
+      const spendingInfo = new Spending(req, res);
       const response = await salesInfo.monthInfo();
+      const spend = await spendingInfo.monthInfo();
       if (response.success) {
         const salesOfMonth = await salesInfo.processSalesData_Month(
-          response.data
+          response.data,
+          spend
         );
         const salesOfWeek = await salesInfo.processSalesData_Weeks(
           req.params.year,
@@ -140,6 +143,7 @@ const process = {
       return res.json(response);
     },
   },
+
   test: async (req, res) => {
     logger.info(`${requestIp.getClientIp(req)}`);
     return res.json('error');

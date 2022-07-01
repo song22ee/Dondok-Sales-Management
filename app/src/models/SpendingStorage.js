@@ -84,16 +84,6 @@ class SpendingStorage {
         year,
         month,
       ];
-      console.log(
-        userid,
-        year,
-        month,
-        rent,
-        admincost,
-        insurance,
-        insurance4,
-        expense
-      );
       con.query(sql, salesinfo, (err) => {
         if (err) {
           reject(err);

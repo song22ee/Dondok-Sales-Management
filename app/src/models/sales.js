@@ -118,13 +118,19 @@ class Sales {
     }
   }
 
-  async processSalesData_Month(data) {
+  async processSalesData_Month(data, spend) {
     const salesOfMonth = data.reduce((result, info) => {
       result = result + info.sales;
       return result;
     }, 0);
-    console.log(salesOfMonth);
-    return salesOfMonth;
+    const total =
+      salesOfMonth -
+      spend.data.rent -
+      spend.data.admincost -
+      spend.data.insurance -
+      spend.data.insurance4 -
+      spend.data.expense;
+    return total;
   }
 
   async processSalesData_Weeks(year, month, data) {
